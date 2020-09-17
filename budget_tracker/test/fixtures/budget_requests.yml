@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  accountNumber: MyString
+  subAccount: MyString
+  requestDate: MyString
+  individualName: MyString
+  phoneNumber: MyString
+  mailingAddress: MyString
+  paymentType: MyString
+  tamuAffilliation: MyString
+  travelFormPassowrd: MyString
+  requestDescription: MyString
+  comments: MyString
+  status: MyString
+  totalPrice: 1.5
+
+two:
+  accountNumber: MyString
+  subAccount: MyString
+  requestDate: MyString
+  individualName: MyString
+  phoneNumber: MyString
+  mailingAddress: MyString
+  paymentType: MyString
+  tamuAffilliation: MyString
+  travelFormPassowrd: MyString
+  requestDescription: MyString
+  comments: MyString
+  status: MyString
+  totalPrice: 1.5
