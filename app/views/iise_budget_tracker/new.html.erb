@@ -1,0 +1,94 @@
+<%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
+
+<div class="budget_requests new">
+  <h2>Create Budget Request</h2>
+  <%= form_for@budget_request, url: iise_budget_tracker_index_path(@budget_request), html: { method: :post } do |f| %>
+
+  <table summary="Budget Request form fields">
+    <tr>
+      <th>Account Number</th>
+      <td>
+        <%= f.text_field(:accountNumber) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Sub Account</th>
+      <td>
+        <%= f.text_field(:subAccount) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Request Date</th>
+      <td>
+        <%= f.date_select("requestDate") %>
+        </td>
+    </tr>
+	<tr>
+      <th>Individual or Business Name</th>
+      <td>
+        <%= f.text_field(:individualName) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Phone Number</th>
+      <td>
+        <%= f.text_field(:phoneNumber) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Mailing Address</th>
+      <td>
+        <%= f.text_field(:mailingAddress) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Payment Type</th>
+      <td>
+        <%= f.select :paymentType, ['Mail to Payee Address', 'Pick up at SOFC', 'Direct Deposit'] %>
+      </td>
+    </tr>
+	<tr>
+	<tr>
+      <th>Tamu Affiliation</th>
+      <td>
+        <%= f.select :tamuAffilliation, ['Student', 'Employee', 'Not Affiliated'] %>
+      </td>
+    </tr>
+      <th>Tavel Form Password</th>
+      <td>
+        <%= f.text_field(:travelFormPassowrd) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Request Description</th>
+      <td>
+        <%= f.text_field(:requestDescription) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Comments</th>
+      <td>
+        <%= f.text_field(:comments) %>
+      </td>
+    </tr>
+	<tr>
+      <th>status</th>
+      <td>
+        <%= f.select :status, ['submitted', 'processing', 'processed'] %>
+      </td>
+    </tr>
+	<tr>
+      <th>Total Price</th>
+      <td>
+        <%= f.number_field :totalPrice, value: number_to_currency(f.object.totalPrice.to_f, delimiter: '', unit: ''), step: :any %>
+      </td>
+    </tr>
+  </table>
+
+  <div class="form-buttons">
+    <%= f.submit("Create Budget Request") %>
+  </div>
+
+  <% end %>
+</div>
+</div>
