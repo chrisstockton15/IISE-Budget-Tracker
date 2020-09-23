@@ -1,10 +1,6 @@
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	<h4 class="modal-title">Item</h4>
-</div>
-<div class="modal-body">
+<div class= "new item">
   <h2>Add Item</h2>
-  <%= budget_form.fields_for :item do |item_form| %>
+  <%= form_for(@item) do |budget_form| %>
 
   <table summary="Item Form fields">
   <tr>
@@ -34,3 +30,4 @@
     </tr>
   </table>
 </div>
+<% end %>

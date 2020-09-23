@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 		end
 	end
 
-	get 'iise_budget_tracker/new_item' => 'iise_budget_tracker#new_item', :as => :new_item
+	get 'iise_budget_tracker/iise_budget_tracker/new_item' => 'iise_budget_tracker#new_item', :as => :new_item
 	
 	
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

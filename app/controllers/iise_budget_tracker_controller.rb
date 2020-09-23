@@ -12,10 +12,7 @@ class IiseBudgetTrackerController < ApplicationController
 	end
 
 	def new_item
-		respond_to do |format|
-		format.html
-		format.js
-		end
+		@item = Item.new
 	end
 
 	def create	
