@@ -102,10 +102,9 @@
       </td>
     </tr>
   </table>
-</div>
-
-
-<% link_to("Add Item", 'iise_budget_tracker/new_item', :class => 'add new item') %>
+  <div class="form-buttons">
+    <%= budget_form.submit("Create Budget Request") %>
+  </div>
 
 
 <div class="item new">
@@ -139,10 +138,8 @@
       </td>
     </tr>
   </table>
+  <% end %>
   </div>
   <% end %>
-  <div class="form-buttons">
-    <%= budget_form.submit("Create Budget Request") %>
-  </div>
-<% end %>
 </div>
+  
