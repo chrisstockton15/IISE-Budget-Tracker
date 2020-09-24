@@ -8,7 +8,7 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def new
 		@budget_request = BudgetRequest.new
-		@budget_request.items.build
+		#@budget_request.items.build
 	end
 
 	def new_item
