@@ -9,7 +9,7 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def new
 		@budget_request = BudgetRequest.new
-		@budget_request.items.build
+		#@budget_request.items.build
 	end
 
 	def new_item
@@ -51,7 +51,7 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def budget_request_params
 		params.require(:budget_request).permit(:eventName, :accountNumber, :subAccount, :requestDate, :individualName, :phoneNumber, :mailingAddress, :uin, :paymentType, 
-		:tamuAffiliation, :travelFormPassword, :requestDescription, :comments, :status, :totalPrice, :items => [:description, :price, :quantity, :type])
+		:tamuAffiliation, :travelFormPassword, :requestDescription, :comments, :status, :totalPrice, items: [:description, :price, :quantity, :type])
 	end
 
 	def item_params
