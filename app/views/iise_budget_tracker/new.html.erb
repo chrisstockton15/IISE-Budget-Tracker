@@ -1,148 +1,118 @@
 <%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
 
 <div class="budget_requests new">
-    <h2>Create Budget Request</h2>
-    <%= form_for @budget_request, url: iise_budget_tracker_index_path(@budget_request), html: {:multipart => true, method: :post } do |budget_form| %>
+  <h2>Create Budget Request</h2>
+  <%= form_for @budget_request, url: iise_budget_tracker_index_path(@budget_request), html: {:multipart => true, method: :post } do |f| %>
 
-    <table summary="Budget Request Form Fields">
-        <tr>
-            <th>Event Name</th>
-            <td>
-                <%= budget_form.text_field(:eventName) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Account Number</th>
-            <td>
-                <%= budget_form.text_field(:accountNumber) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Sub Account</th>
-            <td>
-                <%= budget_form.text_field(:subAccount) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Request Date</th>
-            <td>
-                <%= budget_form.date_select(:requestDate) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Individual or Business Name</th>
-            <td>
-                <%= budget_form.text_field(:individualName) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Phone Number</th>
-            <td>
-                <%= budget_form.text_field(:phoneNumber) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Mailing Address</th>
-            <td>
-                <%= budget_form.text_field(:mailingAddress) %>
-            </td>
-        </tr>
-        <tr>
-            <th>UIN</th>
-            <td>
-                <%= budget_form.text_field(:uin) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Payment Type</th>
-            <td>
-                <%= budget_form.select :paymentType, ['Mail to Payee Address', 'Pick up at SOFC', 'Direct Deposit'] %>
-            </td>
-        </tr>
-        <tr>
-        <tr>
-            <th>Tamu Affiliation</th>
-            <td>
-                <%= budget_form.select :tamuAffilliation, ['Student', 'Employee', 'Not Affiliated'] %>
-            </td>
-        </tr>
-        <th>Travel Form Password</th>
-        <td>
-            <%= budget_form.text_field(:travelFormPassowrd) %>
+  <table summary="Budget Request Form Fields">
+	<tr>
+      <th>Event Name</th>
+      <td>
+        <%= f.text_field(:eventName) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Account Number</th>
+      <td>
+        <%= f.text_field(:accountNumber) %>
+      </td>
+    </tr>
+    <tr>
+      <th>Sub Account</th>
+      <td>
+        <%= f.text_field(:subAccount) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Request Date</th>
+      <td>
+        <%= f.date_select(:requestDate) %>
         </td>
-        </tr>
-        <tr>
-            <th>Request Description</th>
-            <td>
-                <%= budget_form.text_field(:requestDescription) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Upload Reciept</th>
-            <td>
-                <%= budget_form.file_field(:recieptPicture) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Comments</th>
-            <td>
-                <%= budget_form.text_field(:comments) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>
-                <%= budget_form.select :status, ['submitted', 'processing', 'processed'] %>
-            </td>
-        </tr>
-        <tr>
-            <th>Total Price</th>
-            <td>
-                <%= budget_form.number_field :totalPrice, value: number_to_currency(budget_form.object.totalPrice.to_f, delimiter: '', unit: ''), step: :any %>
-            </td>
-        </tr>
-    </table>
+    </tr>
+	<tr>
+      <th>Individual or Business Name</th>
+      <td>
+        <%= f.text_field(:individualName) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Phone Number</th>
+      <td>
+        <%= f.text_field(:phoneNumber) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Mailing Address</th>
+      <td>
+        <%= f.text_field(:mailingAddress) %>
+      </td>
+    </tr>
+	<tr>
+      <th>UIN</th>
+      <td>
+        <%= f.text_field(:uin) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Payment Type</th>
+      <td>
+        <%= f.select :paymentType, ['Mail to Payee Address', 'Pick up at SOFC', 'Direct Deposit'] %>
+      </td>
+    </tr>
+	<tr>
+	<tr>
+      <th>Tamu Affiliation</th>
+      <td>
+        <%= f.select :tamuAffilliation, ['Student', 'Employee', 'Not Affiliated'] %>
+      </td>
+    </tr>
+      <th>Travel Form Password</th>
+      <td>
+        <%= f.text_field(:travelFormPassowrd) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Request Description</th>
+      <td>
+        <%= f.text_field(:requestDescription) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Upload Reciept</th>
+      <td>
+        <%= f.file_field(:recieptPicture) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Comments</th>
+      <td>
+        <%= f.text_field(:comments) %>
+      </td>
+    </tr>
+	<tr>
+      <th>Status</th>
+      <td>
+        <%= f.select :status, ['submitted', 'processing', 'processed'] %>
+      </td>
+    </tr>
+	<tr>
+      <th>Total Price</th>
+      <td>
+        <%= f.number_field :totalPrice, value: number_to_currency(f.object.totalPrice.to_f, delimiter: '', unit: ''), step: :any %>
+      </td>
+    </tr>
+  </table>
+<div class='links'>
+		<% link_to_add_association 'Add Item', f, :items, data: { data_association_insertion_node: '#some-id', association_insertion_method: :append } %>
 </div>
-
-
-<% link_to("Add Item", 'iise_budget_tracker/new_item', :class => 'add new item') %>
-
-
-<div class="item new">
-    <h2>Add Item</h2>
-    <%= budget_form.fields_for :item do |item_form| %>
-
-    <table summary="Item Form fields">
-        <tr>
-        <tr>
-            <th>Description</th>
-            <td>
-                <%= item_form.text_field(:description) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Price</th>
-            <td>
-                <%= item_form.number_field(:price)%>
-            </td>
-        </tr>
-        <tr>
-            <th>Quantity</th>
-            <td>
-                <%= item_form.number_field(:quantity) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Type of Item</th>
-            <td>
-                <%= item_form.select :type, ["Travel", "Food", "Office Supplies", "Utilities", "Membership", "Services & Other Income", "Clothing", "Rent", "Other Expenses", "Items for Resale"]%>
-            </td>
-        </tr>
-    </table>
+<div id='items'>
+	<%= f.fields_for :items do |item_form| %>
+		<%= render 'item_fields', f: item_form %>
+	<% end %>
+	
 </div>
-<% end %>
 <div class="form-buttons">
-    <%= budget_form.submit("Create Budget Request") %>
+    <%= f.submit("Create Budget Request") %>
 </div>
 <% end %>
 </div>
