@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\app",
+    "\\app\\controllers",
+    "\\app\\models",
+    "\\app\\views",
+    "\\app\\views\\iise_budget_tracker",
+    "\\config",
+    "\\config\\environments",
+    "\\db"
+  ],
+  "SelectedNode": "\\app\\views\\iise_budget_tracker",
+  "PreviewInSolutionExplorer": false
+}
