@@ -38,6 +38,14 @@ class IiseBudgetTrackerController < ApplicationController
 		end
 	end
 
+	def destroy 
+	@budget_request = BudgetRequest.find(params[:id])
+	if @budget_request.present?
+		@budget_request.destroy
+	end
+		redirect_to iise_budget_tracker_index_path
+	end	
+
 
 
 	def budget_request_params

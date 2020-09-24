@@ -22,7 +22,7 @@
             <td class="actions">
             <%= link_to("Show", iise_budget_tracker_path(budget_request), :class => 'action show') %>
             <%= link_to("Edit", edit_iise_budget_tracker_path(budget_request), :class => 'action edit') %>
-            <%= link_to("Delete", delete_iise_budget_tracker_path(budget_request), :class => 'action delete') %>
+            <%= link_to 'Delete', iise_budget_tracker_path(budget_request), method: 'delete', data: { confirm: 'Are you sure?' } %>
         </td>
         </tr>
       <% end %>
