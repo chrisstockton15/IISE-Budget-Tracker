@@ -32,7 +32,7 @@ class IiseBudgetTrackerController < ApplicationController
 	def update
 		@budget_request = BudgetRequest.find(params[:id])
 		if @budget_request.update(budget_request_params)
-			redirect_to(isse_budget_tracker_index_path)
+			redirect_to(iise_budget_tracker_index_path)
 		else
 			render('edit')
 		end

@@ -1,10 +1,16 @@
 <%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
 
 <div class="budget_requests edit">
-    <h2>Create Budget Request</h2>
-    <%= form_for@budget_request, url: iise_budget_tracker_index_path(@budget_request), html: { method: :patch } do |f| %>
+    <h2>Edit Budget Request</h2>
+    <%= form_for @budget_request, url: iise_budget_tracker_path, html: {:multipart => true, :method => 'put' } do |f| %>
 
-    <table summary="Budget Request form fields">
+    <table summary="Budget Request Form Fields">
+        <tr>
+            <th>Event Name</th>
+            <td>
+                <%= f.text_field(:eventName) %>
+            </td>
+        </tr>
         <tr>
             <th>Account Number</th>
             <td>
@@ -20,7 +26,7 @@
         <tr>
             <th>Request Date</th>
             <td>
-                <%= f.date_select("requestDate") %>
+                <%= f.date_select(:requestDate) %>
             </td>
         </tr>
         <tr>
@@ -39,6 +45,12 @@
             <th>Mailing Address</th>
             <td>
                 <%= f.text_field(:mailingAddress) %>
+            </td>
+        </tr>
+        <tr>
+            <th>UIN</th>
+            <td>
+                <%= f.text_field(:uin) %>
             </td>
         </tr>
         <tr>
@@ -66,13 +78,19 @@
             </td>
         </tr>
         <tr>
+            <th>Upload Reciept</th>
+            <td>
+                <%= f.file_field(:recieptPicture) %>
+            </td>
+        </tr>
+        <tr>
             <th>Comments</th>
             <td>
                 <%= f.text_field(:comments) %>
             </td>
         </tr>
         <tr>
-            <th>status</th>
+            <th>Status</th>
             <td>
                 <%= f.select :status, ['submitted', 'processing', 'processed'] %>
             </td>
@@ -90,5 +108,4 @@
     </div>
 
     <% end %>
-</div>
 </div>
