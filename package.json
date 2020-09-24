@@ -1,5 +1,7 @@
 {
   "name": "budget_tracker",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@nathanvda/cocoon": "^1.2.14"
+  }
 }
