@@ -1,0 +1,22 @@
+<%# error_messages_for(f.object) %>
+
+<table summary="Product form fields">
+  <tr>
+    <th>Item</th>
+    <td><%= f.text_field(:description) %></td>
+  </tr>
+  <tr>
+    <th>Type</th>
+    <td>
+      <%= f.select(:expense_type, ['Travel','Food','Office Supplies','Utilities','Membership','Service and Other Income','Clothing','Rent','Other Expenses','Items for Resale']) %>
+    </td>
+  </tr>
+  <tr>
+    <th>Quantity</th>
+    <td><%= f.text_field(:quantity) %></td>
+  </tr>
+  <tr>
+    <th>Price</th>
+    <td><%= f.text_field(:price) %></td>
+  </tr>
+</table>

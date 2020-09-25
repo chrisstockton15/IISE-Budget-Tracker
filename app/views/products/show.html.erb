@@ -1,0 +1,27 @@
+<% @product_title = "List of Items" %>
+
+<%= link_to("<< Back to List", products_path(:budget_request_id => @budget_request.id), :class => 'back-link') %>
+
+<div class="products show">
+  <h2>Show Page</h2>
+
+  <table summary="Product detail view">
+    <tr>
+      <th>Item</th>
+      <td><%= @product.description %></td>
+    </tr>
+    <tr>
+      <th>Type</th>
+      <td><%= @product.expense_type %></td>
+    </tr>
+    <tr>
+      <th>Quantity</th>
+      <td><%= @product.quantity %></td>
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td><%= @product.price %></td>
+    </tr>
+  </table>
+
+</div>

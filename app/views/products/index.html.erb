@@ -1,0 +1,31 @@
+<% @product_title = "All Products" %>
+
+<%= link_to("<< Back to Requests", iise_budget_tracker_index_path(:budget_request_id => @budget_request.id), :class => 'back-link') %>
+
+<div class="products index">
+  <h2>Products</h2>
+
+  <%= link_to("Add New Product", new_product_path(:budget_request_id => @budget_request.id), :class => 'action new') %>
+
+  <table class="listing" summary="Product list">
+    <tr class="header">
+      <th>Item</th>
+      <th>Type</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    <% @products.each do |product| %>
+    <tr>
+      <td><%= product.description %></td>
+      <td><%= product.expense_type %></td>
+      <td><%= product.quantity %></td>
+      <td><%= product.price %></td>
+      <td class="actions">
+        <%= link_to("Show", product_path(product,:budget_request_id => @budget_request.id), :class => 'action show') %>
+        <%= link_to("Edit", edit_product_path(product,:budget_request_id => @budget_request.id), :class => 'action edit') %>
+        <%= link_to("Delete", delete_product_path(product,:budget_request_id => @budget_request.id), :class => 'action delete') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
