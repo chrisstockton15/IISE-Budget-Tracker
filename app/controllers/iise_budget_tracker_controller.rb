@@ -4,6 +4,7 @@ class IiseBudgetTrackerController < ApplicationController
 	end
 
 	def show
+		@budget_request = BudgetRequest.find(params[:id])
 	end
 
 	def new
