@@ -34,7 +34,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 
-gen 'cocoon'
+gem 'cocoon'
+
+gem 'jquery-rails'
 
 
 group :development, :test do
