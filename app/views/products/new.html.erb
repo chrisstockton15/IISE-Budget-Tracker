@@ -1,0 +1,18 @@
+
+
+<%= link_to("<< Back to List", products_path(:budget_request_id => @budget_request.id), :class => 'back-link') %>
+
+<div class="products new">
+  <h2>Create Product</h2>
+
+  <%= form_for(@product, :url => products_path(:budget_request_id => @budget_request.id)) do |f| %>
+
+    <%= render(:partial => 'form', :locals => {:f => f}) %>
+
+    <div class="form-buttons">
+      <%= f.submit("Create Product") %>
+    </div>
+
+  <% end %>
+</div>
+
