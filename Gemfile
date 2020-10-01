@@ -36,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'cocoon'
 
-gem 'jquery-rails'
+# gem 'jquery-rails'
 
 
 group :development, :test do
