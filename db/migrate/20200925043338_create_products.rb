@@ -8,7 +8,6 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.string :expense_type
       t.string :permalink
       t.timestamps
-      t.timestamps
     end
     add_index("products", "budget_request_id")
     add_index("products", "permalink")
