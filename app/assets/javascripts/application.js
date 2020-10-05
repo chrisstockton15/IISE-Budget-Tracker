@@ -15,10 +15,12 @@
 //= require_tree .
 //= require jquery
 //= require cocoon
-
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
 require("bootstrap")
 import "../stylesheets/application";
-document.addEventListener("turbolinks:load", function() {
+document.addEventListener("turbolinks:load", function () {
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
         $('[data-toggle="popover"]').popover()
