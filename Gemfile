@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'cocoon'
 
+gem 'webpacker', '~> 5.x'
+
 # gem 'jquery-rails'
 
 
