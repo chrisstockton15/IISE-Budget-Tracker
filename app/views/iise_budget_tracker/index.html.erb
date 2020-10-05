@@ -36,7 +36,8 @@ I will notify the student organization.
             <td class="actions">
             <%= link_to("Show", iise_budget_tracker_path(budget_request), :class => 'action show') %>
             <%= link_to("Edit", edit_iise_budget_tracker_path(budget_request), :class => 'action edit') %>
-            <%= link_to 'Delete', iise_budget_tracker_path(budget_request), method: 'delete', data: { confirm: 'Are you sure?' } %>
+            <%= button_to 'Remove', iise_budget_tracker_path(budget_request), method: 'delete', data: { confirm: 'Are you sure?' } %>
+
             <%= link_to "<button>View Items</button>".html_safe, products_path(:budget_request_id => budget_request.id), :class => 'action show' %>
         </td>
         </tr>
