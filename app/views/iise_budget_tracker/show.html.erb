@@ -1,66 +1,70 @@
-<%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
+<div class="container p-2 my-2">
+    <%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
 
-<table summary="Budget Request detailed view">
-      <tr>
-        <th>Event Name</th>
-        <td><%= @budget_request.eventName %></td>
-      </tr>
-      <tr>
-        <th>Account Number</th>
-        <td><%= @budget_request.accountNumber %></td>
-      </tr>
-      <tr>
-        <th>Sub Account</th>
-        <td><%= @budget_request.subAccount %></td>
-      </tr>
-      <tr>
-        <th>Request Date</th>
-        <td><%= @budget_request.requestDate.strftime("%m/%d/%Y") %></td>
-      </tr>
-      <tr>
-        <th>Individual/Business Name</th>
-        <td><%= @budget_request.individualName %></td>
-      </tr>
-      <tr>
-        <th>Phone Number</th>
-        <td><%= @budget_request.phoneNumber %></td>
-      </tr>
-      <tr>
-        <th>Mailing Address</th>
-        <td><%= @budget_request.mailingAddress %></td>
-      </tr>
-      <tr>
-        <th>UIN</th>
-        <td><%= @budget_request.uin %></td>
-      </tr>
-      <tr>
-        <th>Payment Type</th>
-        <td><%= @budget_request.paymentType %></td>
-      </tr>
-      <tr>
-        <th>Tamu Affiliation</th>
-        <td><%= @budget_request.tamuAffilliation %></td>
-      </tr>
-      <tr>
-        <th>Travel Form Password</th>
-        <td><%= @budget_request.travelFormPassowrd %></td>
-      </tr>
-      <tr>
-        <th>Request Description</th>
-        <td><%= @budget_request.requestDescription %></td>
-      </tr>
-      <%# TODO add receipt image %>
-      <tr>
-        <th>Comments</th>
-        <td><%= @budget_request.comments %></td>
-      </tr>
-      <tr>
-        <th>Status</th>
-        <td><%= @budget_request.status %></td>
-      </tr>
-      <tr>
-        <th>Total Price</th>
-        <td><%= @budget_request.totalPrice %></td>
-      </tr>
+    <div class="container p-2 my-2">
+        <table summary="Budget Request detailed view">
+            <tr>
+                <th>Event Name</th>
+                <td><%= @budget_request.eventName %></td>
+            </tr>
+            <tr>
+                <th>Account Number</th>
+                <td><%= @budget_request.accountNumber %></td>
+            </tr>
+            <tr>
+                <th>Sub Account</th>
+                <td><%= @budget_request.subAccount %></td>
+            </tr>
+            <tr>
+                <th>Request Date</th>
+                <td><%= @budget_request.requestDate.strftime("%m/%d/%Y") %></td>
+            </tr>
+            <tr>
+                <th>Individual/Business Name</th>
+                <td><%= @budget_request.individualName %></td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td><%= @budget_request.phoneNumber %></td>
+            </tr>
+            <tr>
+                <th>Mailing Address</th>
+                <td><%= @budget_request.mailingAddress %></td>
+            </tr>
+            <tr>
+                <th>UIN</th>
+                <td><%= @budget_request.uin %></td>
+            </tr>
+            <tr>
+                <th>Payment Type</th>
+                <td><%= @budget_request.paymentType %></td>
+            </tr>
+            <tr>
+                <th>Tamu Affiliation</th>
+                <td><%= @budget_request.tamuAffilliation %></td>
+            </tr>
+            <tr>
+                <th>Travel Form Password</th>
+                <td><%= @budget_request.travelFormPassowrd %></td>
+            </tr>
+            <tr>
+                <th>Request Description</th>
+                <td><%= @budget_request.requestDescription %></td>
+            </tr>
+            <%# TODO add receipt image %>
+            <tr>
+                <th>Comments</th>
+                <td><%= @budget_request.comments %></td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td><%= @budget_request.status %></td>
+            </tr>
+            <tr>
+                <th>Total Price</th>
+                <td><%= @budget_request.totalPrice %></td>
+            </tr>
 
-</table>
+        </table>
+    </div>
+</div>
