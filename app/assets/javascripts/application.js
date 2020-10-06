@@ -17,3 +17,7 @@
 //= require cocoon
 
 import "bootstrap";
+
+//this is needed for the dynamic form fields
+require("jquery")
+require("@nathanvda/cocoon")
