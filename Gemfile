@@ -36,8 +36,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'cocoon'
 
-# gem 'jquery-rails'
+gem 'jquery-rails'
 
+gem 'activestorage', '~> 6.0', '>= 6.0.3.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
