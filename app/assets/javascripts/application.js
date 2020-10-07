@@ -15,9 +15,14 @@
 //= require_tree .
 //= require jquery
 //= require cocoon
-
-import "bootstrap";
-
-//this is needed for the dynamic form fields
-require("jquery")
-require("@nathanvda/cocoon")
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
+require("bootstrap")
+import "../stylesheets/application";
+document.addEventListener("turbolinks:load", function () {
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        $('[data-toggle="popover"]').popover()
+    })
+})

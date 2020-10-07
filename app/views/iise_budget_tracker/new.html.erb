@@ -104,7 +104,7 @@
   </table>
 
 <div class='links'>
-		<%= link_to_add_association 'Add Item', f, :items, data: { data_association_insertion_node: '#some-id', association_insertion_method: :append } %>
+		<% link_to_add_association 'Add Item', f, :items, data: { data_association_insertion_node: '#some-id', association_insertion_method: :append } %>
 </div>
 <div id='items'>
 	<%= f.fields_for :items do |item_form| %>

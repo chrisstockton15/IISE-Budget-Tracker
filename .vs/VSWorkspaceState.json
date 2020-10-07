@@ -7,10 +7,12 @@
     "\\app\\assets\\javascripts",
     "\\app\\assets\\javascripts\\channels",
     "\\app\\assets\\stylesheets",
+    "\\app\\views",
     "\\app\\views\\iise_budget_tracker",
-    "\\app\\views\\products",
-    "\\spec"
+    "\\app\\views\\layouts",
+    "\\config",
+    "\\config\\initializers"
   ],
-  "SelectedNode": "\\spec\\requests",
+  "SelectedNode": "\\app\\views\\iise_budget_tracker\\new_item.html.erb",
   "PreviewInSolutionExplorer": false
 }

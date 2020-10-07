@@ -19,6 +19,8 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -33,12 +35,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-
+gem 'paperclip'
 gem 'cocoon'
 
 gem 'webpacker', '~> 5.x'
 
-# gem 'jquery-rails'
+gem 'bootstrap', '~> 4.5.0'
+gem 'jquery-rails'
 
 
 group :development, :test do
@@ -48,6 +51,8 @@ group :development, :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
+  gem 'minitest'
+  gem 'webdrivers'
 end
 
 group :development do
