@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Show', type: :system do
   describe 'show page' do
-    it 'shows the right image name' do
+    it 'shows the correct image name' do
         visit iise_budget_tracker_index_path
         click_on 'Create New Budget Request'
         #page.attach_file('images', "#{Rails.root}/spec/files/images/simplecov_1.JPG", make_visible: false)
@@ -12,10 +12,11 @@ RSpec.describe 'Show', type: :system do
         #sleep(5)
         #attach_file("Upload Receipt", Rails.root + "spec/files/images/simplecov_1.JPG")
         click_on 'Create Budget Request'
-        sleep(10)
-        click_on 'Edit'
-        sleep(5)
-        expect(page).to have_content("budget")
+        #sleep(10)
+        click_on('Show', match: :first)
+        #find('#Show .search').click
+        #sleep(100)
+        expect(page).to have_content("simplecov_1.JPG")
     end
   end
 end
