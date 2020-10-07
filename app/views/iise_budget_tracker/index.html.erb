@@ -70,7 +70,7 @@
                         <%= link_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
                     </button>
                     <button type="button" class="btn">
-                        <%= link_to "View Items", products_path(:br_id => br.id), :class => 'action show' %>
+                        <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
                     </button>
                 </td>
             </tr>
