@@ -248,6 +248,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap (~> 4.5.0)
+  activestorage (~> 6.0, >= 6.0.3.3)
   byebug
   capybara (>= 2.15)
   cocoon
