@@ -1,18 +1,6 @@
 class IiseBudgetTrackerController < ApplicationController
 	def index
 		@budget_request = BudgetRequest.order(:requestDate)
-		if params[:selectType] && params[:selectType] == "all"
-			@budget_request = BudgetRequest.order(:requestDate)
-		end
-		if params[:selectType] && params[:selectType] == "submitted"
-			@budget_request = BudgetRequest.where(status: "submitted")
-		end
-		if params[:selectType] && params[:selectType] == "processing"
-			@budget_request = BudgetRequest.where(status: "processing")
-		end
-		if params[:selectType] && params[:selectType] == "processed"
-			@budget_request = BudgetRequest.where(status: "processed")
-		end
 	end
 
 	def show
