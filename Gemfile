@@ -40,6 +40,9 @@ gem 'webpacker', '~> 5.x'
 
 # gem 'jquery-rails'
 
+gem 'activestorage', '~> 6.0', '>= 6.0.3.3'
+gem 'mini_magick', '~> 4.10', '>= 4.10.1'
+#gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

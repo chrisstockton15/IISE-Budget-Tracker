@@ -7,46 +7,68 @@ my involvement with the student organization.  Should I no longer wish to share 
 I will notify the student organization.
   </td>
 </div>
-
-<div class="budget request index">
-  <h2>Here are all your budget requests</h2>
-  <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
-  <h2>Filter for a specific status of a reqeust</h2>
-  <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-    <%= form.select :selectType, ["all", "submitted", "processing", "processed"] %>, 
-  <%= form.submit "Filter" %>
-  <% end %>
-    
-    <table class="listing" summary="budget_request list">
-      <tr class="header">
-        <th>Request Description</th>
-        <th>Individual Name</th>
-        <th>Request Date</th>
-        <th>Status</th>
-        <th>Action</th>
-      </tr>
-      <% @budget_request.each do |budget_request| %>
-      <tr>
-        <td class="center">
-          <%= budget_request.requestDescription %>
-        </td>
-        <td class="center">
-          <%= budget_request.individualName %>
-        </td>
-        <td class="center">
-          <%= budget_request.requestDate %>
-        </td>
-        <td class="center">
-          <%= budget_request.status %>
-        </td>
-            <td class="actions">
-            <%= link_to("Show", iise_budget_tracker_path(budget_request), :class => 'action show') %>
-            <%= link_to("Edit", edit_iise_budget_tracker_path(budget_request), :class => 'action edit') %>
-            <%= link_to 'Delete', delete_iise_budget_tracker_path(budget_request), method: 'delete', data: { confirm: 'Are you sure?' } %>
-            <%= link_to "<button>View Items</button>".html_safe, products_path(:budget_request_id => budget_request.id), :class => 'action show' %>
-        </td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-  
+<div class="container p-2 my-2">
+    <div class="budget request index">
+        <h2>Here are all your budget requests</h2>
+        <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
+	<%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+    		<%= form.select :selectType, ["all", "submitted", "processing", "processed"] %>, 
+  	<%= form.submit "Filter" %>
+  	<% end %>
+        <table class="listing container p-2 my-2" summary="budget_request list">
+            <tr class="header">
+                <th>Request Description</th>
+                <th>Individual Name</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <% @budget_request.each do |br| %>
+            <!-- Add totals, only display once all added -->
+            <p hidden>
+                <%=
+                if not br.equal?(@budget_request.last)
+                grandTotal += br.totalPrice
+                end 
+                %>
+            </p>
+            <p>
+                <%=
+                if br.equal?(@budget_request.last)
+                grandTotal += br.totalPrice
+                @totalDisplay = "Total Spent: $" + grandTotal.to_s
+                end 
+                %>
+            </p>
+            <tr>
+                <td class="center">
+                    <%= br.requestDescription %>
+                </td>
+                <td class="center">
+                    <%= br.individualName %>
+                </td>
+                <td class="center">
+                    <%= br.requestDate %>
+                </td>
+                <td class="center">
+                    <%= br.status %>
+                </td>
+                <td class="actions">
+                    <button type="button" class="btn">
+                        <%= link_to("Show", iise_budget_tracker_path(br), :class => 'action show') %>
+                    </button>
+                    <button type="button" class="btn">
+                        <%= link_to("Edit", edit_iise_budget_tracker_path(br), :class => 'action edit') %>
+                    </button>
+                    <button type="button" class="btn">
+                        <%= link_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </button>
+                    <button type="button" class="btn">
+                        <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
+                    </button>
+                </td>
+            </tr>
+            <% end %>
+        </table>
+    </div>
+</div>

@@ -4,105 +4,38 @@
     <h2>Edit Budget Request</h2>
     <%= form_for @budget_request, url: iise_budget_tracker_path, html: {:multipart => true, :method => 'put' } do |f| %>
 
-    <table summary="Budget Request Form Fields">
-        <tr>
-            <th>Event Name</th>
-            <td>
-                <%= f.text_field(:eventName) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Account Number</th>
-            <td>
-                <%= f.text_field(:accountNumber) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Sub Account</th>
-            <td>
-                <%= f.text_field(:subAccount) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Request Date</th>
-            <td>
-                <%= f.date_select(:requestDate) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Individual or Business Name</th>
-            <td>
-                <%= f.text_field(:individualName) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Phone Number</th>
-            <td>
-                <%= f.text_field(:phoneNumber) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Mailing Address</th>
-            <td>
-                <%= f.text_field(:mailingAddress) %>
-            </td>
-        </tr>
-        <tr>
-            <th>UIN</th>
-            <td>
-                <%= f.text_field(:uin) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Payment Type</th>
-            <td>
-                <%= f.select :paymentType, ['Mail to Payee Address', 'Pick up at SOFC', 'Direct Deposit'] %>
-            </td>
-        </tr>
-        <tr>
-        <tr>
-            <th>Tamu Affiliation</th>
-            <td>
-                <%= f.select :tamuAffilliation, ['Student', 'Employee', 'Not Affiliated'] %>
-            </td>
-        </tr>
-        <th>Travel Form Password</th>
-        <td>
-            <%= f.text_field(:travelFormPassowrd) %>
-        </td>
-        </tr>
-        <tr>
-            <th>Statement of Purpose</th>
-            <td>
-                <%= f.text_field(:requestDescription) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Upload Receipt</th>
-            <td>
-                <%= f.file_field(:recieptPicture) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Comments</th>
-            <td>
-                <%= f.text_field(:comments) %>
-            </td>
-        </tr>
-        <tr>
-            <th>Status</th>
-            <td>
-                <%= f.select :status, ['submitted', 'processing', 'processed'] %>
-            </td>
-        </tr>
-        <tr>
-            <th>Total Price</th>
-            <td>
-                <%= f.number_field :totalPrice, value: number_to_currency(f.object.totalPrice.to_f, delimiter: '', unit: ''), step: :any %>
-            </td>
-        </tr>
-    </table>
 
+        <div class="form group">
+            <%= f.label "Payment Type" %>
+            <%= f.select :paymentType, ['Student', 'Employee', 'Not Affiliated'], {class:"form-control"}%>
+        </div>
+        <div class="form group">
+            <%= f.label "Travel Form Password" %>
+            <%= f.text_field :travelFormPassowrd, {class:"form-control", placeholder:"Enter Travel Form Password"}%>
+        </div>
+        <div class="form group">
+            <%= f.label "Statement of Purpose" %>
+            <%= f.text_field :requestDescription, {class:"form-control", placeholder:"Enter statement of purpose"}%>
+        </div>
+        <div class="form group">
+            <%= f.label "Upload Receipt" %>
+            <%= f.file_field :images, multiple: true%>
+        </div>
+        <div class="form group">
+            <%= f.label "Comments" %>
+            <%= f.text_field :comments, {class:"form-control", placeholder:"Enter comments"}%>
+        </div>
+        <div class="form group">
+            <%= f.label "Status" %>
+            <%= f.select :status, ['submitted', 'processing', 'processed']%>
+        </div>
+        <div class="form group">
+            <%= f.label "Total Price" %>
+            <%= f.number_field :totalPrice, value: number_to_currency(f.object.totalPrice.to_f, delimiter: '', unit: ''), step: :any %>
+        </div>
+        <div class="form-buttons">
+            <%= f.submit("Update Budget Request") %>
+        </div>
     <div class="form-buttons">
         <%= f.submit("Update Budget Request") %>
     </div>

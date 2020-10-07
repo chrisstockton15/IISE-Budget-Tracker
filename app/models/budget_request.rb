@@ -1,5 +1,6 @@
 class BudgetRequest < ApplicationRecord
 	has_many :items
 	has_many :products
-	accepts_nested_attributes_for :items, allow_destroy: true
+	has_many_attached :images
+	accepts_nested_attributes_for :items
 end
