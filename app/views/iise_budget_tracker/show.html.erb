@@ -54,8 +54,14 @@
             <tr>
               <th>Receipt</th>
               <td>
-                <%= image_tag(@budget_request.image, style:"width:25%") if @budget_request.image.attached? %>
-                <%= "Not provided" if not @budget_request.image.attached? %>
+                <% if @budget_request.images.attached? %>
+                  <% @budget_request.images.each do |image| %>
+                        <%= image_tag image.variant(resize: "250x250!").processed %>
+                        <%= image.filename%>
+                  <% end %>
+                <% end %>
+                
+                <%= "Not provided" if not @budget_request.images.attached? %>
               </td>
             </tr>
             <tr>
