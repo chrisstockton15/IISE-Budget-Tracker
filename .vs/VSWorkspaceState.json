@@ -9,10 +9,8 @@
     "\\app\\assets\\stylesheets",
     "\\app\\views",
     "\\app\\views\\iise_budget_tracker",
-    "\\app\\views\\layouts",
-    "\\config",
-    "\\config\\initializers"
+    "\\app\\views\\products"
   ],
-  "SelectedNode": "\\app\\views\\iise_budget_tracker\\new_item.html.erb",
+  "SelectedNode": "\\app\\views\\iise_budget_tracker\\new.html.erb",
   "PreviewInSolutionExplorer": false
 }
