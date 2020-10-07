@@ -51,7 +51,18 @@
                 <th>Request Description</th>
                 <td><%= @budget_request.requestDescription %></td>
             </tr>
-            <%# TODO add receipt image %>
+            <tr>
+              <th>Receipt</th>
+              <td>
+                <% if @budget_request.images.attached? %>
+                  <% @budget_request.images.each do |image| %>
+                        <%= image_tag image.variant(resize: "250x250!").processed %>
+                        <%= image.filename%>
+                  <% end %>
+                <% end %>
+                <%= "Not provided" if not @budget_request.images.attached? %>
+              </td>
+            </tr>
             <tr>
                 <th>Comments</th>
                 <td><%= @budget_request.comments %></td>

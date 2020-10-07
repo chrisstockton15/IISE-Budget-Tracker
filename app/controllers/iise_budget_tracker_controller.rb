@@ -4,7 +4,7 @@ class IiseBudgetTrackerController < ApplicationController
 	end
 
 	def show
-		@budget_request = BudgetRequest.find(params[:id])
+		@budget_request = BudgetRequest.with_attached_images.find(params[:id])
 	end
 
 	def new
@@ -51,7 +51,7 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def budget_request_params
 		params.require(:budget_request).permit(:eventName, :accountNumber, :subAccount, :requestDate, :individualName, :phoneNumber, :mailingAddress, :uin, :paymentType, 
-		:tamuAffiliation, :travelFormPassword, :requestDescription, :comments, :status, :totalPrice, items: [:description, :price, :quantity, :type])
+		:tamuAffiliation, :travelFormPassword, :requestDescription, :comments, :status, :totalPrice,images: [], items: [:description, :price, :quantity, :type])
 	end
 
 	def item_params
