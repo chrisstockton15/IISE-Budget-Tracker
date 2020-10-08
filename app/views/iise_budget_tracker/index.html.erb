@@ -17,12 +17,32 @@
     </div>
 </div>
 
-<p hidden>
-    <%=
-    @grandTotal = 0
-    grandTotal = 0
+<div class="container p-2 my-2">
+    <div class="budget request index">
+        <h2>Budget Statistics</h2>
+
+    <%   
+    submittedTotal = 0
+    processingTotal = 0
+    processedTotal = 0
     %>
-</p>
+
+     <% @budget_request.each do |br| %>
+        <%
+            if br.status == 'submitted'
+            submittedTotal += br.totalPrice
+            elsif br.status == 'processing'
+            processingTotal += br.totalPrice
+            elsif br.status == 'processed'
+            processedTotal += br.totalPrice
+            end 
+        %>
+     <% end %>
+
+<p>Processed: $<%= processedTotal %></p>
+<p>Processing: $<%= processingTotal %></p>
+<p>Submitted: $<%= submittedTotal %></p>
+
 
 
 <div class="container p-2 my-2">
@@ -65,6 +85,13 @@
                     <%= br.requestDate %>
                 </td>
                 <td class="center">
+                    <% if br.status == 'submitted'%>
+                    <p style = "color:#500000">
+                    <% elsif br.status == 'processed'%>
+                    <p style = "color:#00FF00">
+                    <% elsif br.status == 'processing'%>
+                    <p style ="color:#006400"> </style>
+                    <% end %>
                     <%= br.status %>
                 </td>
                 <td class="actions">
