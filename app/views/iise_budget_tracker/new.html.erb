@@ -1,6 +1,17 @@
-<%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
+<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light px-5">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+            </ul>
+        </div>
+</nav>
 
-<div class="budget_requests new">
+
+
+<div class="container p-2 my-2">
+  <%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
   <h2>Create Budget Request</h2>
   <%= form_for @budget_request, url: iise_budget_tracker_index_path(@budget_request), html: {:multipart => true, method: :post } do |f| %>
 
@@ -110,7 +121,7 @@
 	<%= f.fields_for :items do |item_form| %>
 		<%= render 'item_fields', f: item_form %>
 	<% end %>
-	
+
 </div>
 <div class="form-buttons">
     <%= f.submit("Create Budget Request") %>
