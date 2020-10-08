@@ -1,9 +1,17 @@
+<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light px-5">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+            </ul>
+        </div>
+</nav>
+
 <div class="container p-2 my-2 border">
     <div class="disclaimer">
         <td>By entering this system and entering any data requested, I am giving my consent to share data related to
-
             my involvement with the student organization. Should I no longer wish to share the data I've provided,
-
             I will notify the student organization.
         </td>
     </div>
@@ -35,7 +43,7 @@
                 <%=
                 if not br.equal?(@budget_request.last)
                 grandTotal += br.totalPrice
-                end 
+                end
                 %>
             </p>
             <p>
@@ -43,7 +51,7 @@
                 if br.equal?(@budget_request.last)
                 grandTotal += br.totalPrice
                 @totalDisplay = "Total Spent: $" + grandTotal.to_s
-                end 
+                end
                 %>
             </p>
             <tr>

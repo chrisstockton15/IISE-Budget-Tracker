@@ -14,3 +14,27 @@
  *= require_self
  */
 @import "node_modules/bootstrap/scss/bootstrap";
+
+.nav-area {
+    background: blue;
+}
+
+.nav-title {
+    padding-left: 20%;
+}
+
+.app-name {
+    color: white;
+}
+
+.navbar-brand {
+    color: white;
+}
+
+.navbar-brand:hover {
+    color:white;
+}
+
+.nav-list {
+    float: right
+}
