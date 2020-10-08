@@ -2,17 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\app",
-    "\\app\\assets",
-    "\\app\\assets\\config",
-    "\\app\\assets\\javascripts",
-    "\\app\\assets\\javascripts\\channels",
-    "\\app\\assets\\stylesheets",
+    "\\app\\controllers",
+    "\\app\\javascript\\packs",
     "\\app\\views",
-    "\\app\\views\\iise_budget_tracker",
     "\\app\\views\\layouts",
-    "\\config",
-    "\\config\\initializers"
+    "\\budget_tracker\\app",
+    "\\config\\webpack",
+    "\\lib\\assets",
+    "\\spec"
   ],
-  "SelectedNode": "\\app\\views\\iise_budget_tracker\\new_item.html.erb",
+  "SelectedNode": "\\spec\\budget_request_filter_spec.rb",
   "PreviewInSolutionExplorer": false
 }
