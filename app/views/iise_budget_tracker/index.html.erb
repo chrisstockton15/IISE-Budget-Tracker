@@ -58,22 +58,7 @@
                 <th>Action</th>
             </tr>
             <% @budget_request.each do |br| %>
-            <!-- Add totals, only display once all added -->
-            <p hidden>
-                <%=
-                if not br.equal?(@budget_request.last)
-                grandTotal += br.totalPrice
-                end
-                %>
-            </p>
-            <p>
-                <%=
-                if br.equal?(@budget_request.last)
-                grandTotal += br.totalPrice
-                @totalDisplay = "Total Spent: $" + grandTotal.to_s
-                end
-                %>
-            </p>
+
             <tr>
                 <td class="center">
                     <%= br.requestDescription %>
