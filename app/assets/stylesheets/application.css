@@ -15,6 +15,12 @@
  */
 @import "node_modules/bootstrap/scss/bootstrap";
 
+
+
+.navbar {
+    z-index: 999;
+}
+
 .nav-area {
     background: blue;
 }
@@ -37,4 +43,16 @@
 
 .nav-list {
     float: right
+}
+
+.submit {
+    color:#500000
+}
+
+.processed {
+    color:#00FF00
+}
+
+.processing {
+    color:#00FF00
 }
