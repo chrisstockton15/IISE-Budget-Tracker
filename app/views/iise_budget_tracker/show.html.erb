@@ -69,12 +69,14 @@
             <div class="form group my-2">
                 <h5>Receipt:</h5>
                 <p>
-                    <% if @budget_request.images.attached? %>
-                    <% @budget_request.images.each do |image| %>
-                    <%= image_tag image.variant(resize: "250x250!").processed %>
-                    <%= image.filename%>
-                    <% end %>
-                    <% end %>
+                  <% if @budget_request.images.attached? %>
+                    <div style="width:400px;height:400px;">
+                      <% @budget_request.images.each do |image| %>
+                        <%= image_tag(image, style: 'width:100%;height: auto') %>
+                        <%= image.filename%>
+                      <% end %>
+                    </div>
+                  <% end %>
                     <%= "Not provided" if not @budget_request.images.attached? %>
                 </p>
             </div>
