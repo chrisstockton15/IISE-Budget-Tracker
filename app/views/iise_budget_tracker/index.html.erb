@@ -51,8 +51,8 @@
         <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
         <p>
           <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-          <%= form.select :selectType, ["all", "submitted", "processing", "processed"] %>,
-          <%= form.submit "Filter" %>
+          <%= form.select :selectType, ["Date", "Status", "Individual Name"] %>
+          <%= form.submit "Sort By" %>
           <% end %>
         </p>
         <table class="listing container p-2 my-2" summary="budget_request list">
