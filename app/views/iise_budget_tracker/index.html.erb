@@ -32,11 +32,11 @@
 
             <% @budget_request.each do |br| %>
             <%
-            if br.status == 'submitted'
+            if br.status == 'Submitted'
             submittedTotal += br.totalPrice
-            elsif br.status == 'processing'
+            elsif br.status == 'Processing'
             processingTotal += br.totalPrice
-            elsif br.status == 'processed'
+            elsif br.status == 'Processed'
             processedTotal += br.totalPrice
             end 
             %>
