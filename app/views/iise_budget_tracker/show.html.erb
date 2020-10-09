@@ -1,81 +1,100 @@
-<div class="container p-2 my-2">
-    <%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
+<html class="bg-light">
+
+<body class="bg-light">
+
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom bg-light">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container p-2 my-2">
-        <table summary="Budget Request detailed view">
-            <tr>
-                <th>Event Name</th>
-                <td><%= @budget_request.eventName %></td>
-            </tr>
-            <tr>
-                <th>Account Number</th>
-                <td><%= @budget_request.accountNumber %></td>
-            </tr>
-            <tr>
-                <th>Sub Account</th>
-                <td><%= @budget_request.subAccount %></td>
-            </tr>
-            <tr>
-                <th>Request Date</th>
-                <td><%= @budget_request.requestDate.strftime("%m/%d/%Y") %></td>
-            </tr>
-            <tr>
-                <th>Individual/Business Name</th>
-                <td><%= @budget_request.individualName %></td>
-            </tr>
-            <tr>
-                <th>Phone Number</th>
-                <td><%= @budget_request.phoneNumber %></td>
-            </tr>
-            <tr>
-                <th>Mailing Address</th>
-                <td><%= @budget_request.mailingAddress %></td>
-            </tr>
-            <tr>
-                <th>UIN</th>
-                <td><%= @budget_request.uin %></td>
-            </tr>
-            <tr>
-                <th>Payment Type</th>
-                <td><%= @budget_request.paymentType %></td>
-            </tr>
-            <tr>
-                <th>Tamu Affiliation</th>
-                <td><%= @budget_request.tamuAffilliation %></td>
-            </tr>
-            <tr>
-                <th>Travel Form Password</th>
-                <td><%= @budget_request.travelFormPassowrd %></td>
-            </tr>
-            <tr>
-                <th>Request Description</th>
-                <td><%= @budget_request.requestDescription %></td>
-            </tr>
-            <tr>
-              <th>Receipt</th>
-              <td>
-                <% if @budget_request.images.attached? %>
-                  <% @budget_request.images.each do |image| %>
-                        <%= image_tag image.variant(resize: "250x250!").processed %>
-                        <%= image.filename%>
-                  <% end %>
-                <% end %>
-                <%= "Not provided" if not @budget_request.images.attached? %>
-              </td>
-            </tr>
-            <tr>
-                <th>Comments</th>
-                <td><%= @budget_request.comments %></td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td><%= @budget_request.status %></td>
-            </tr>
-            <tr>
-                <th>Total Price</th>
-                <td><%= @budget_request.totalPrice %></td>
-            </tr>
+        <%= link_to("<< Back to List", iise_budget_tracker_index_path, :class => 'back-link') %>
 
-        </table>
+        <div class="budget_requests show container p-2 my-2">
+            <h2>Budget Request Details</h2>
+
+            <div class="form group my-2">
+                <h5>Event Name:</h5>
+                <p><%= @budget_request.eventName %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Account Number:</h5>
+                <p><%= @budget_request.accountNumber %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Sub Account:</h5>
+                <p><%= @budget_request.subAccount %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Request Date:</h5>
+                <p><%= @budget_request.requestDate.strftime("%m/%d/%Y") %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Individual/Business Name:</h5>
+                <p><%= @budget_request.individualName %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Phone Number:</h5>
+                <p><%= @budget_request.phoneNumber %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Mailing Address:</h5>
+                <p><%= @budget_request.mailingAddress %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>UIN:</h5>
+                <p><%= @budget_request.uin %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Payment Type:</h5>
+                <p><%= @budget_request.paymentType %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Tamu Affiliation:</h5>
+                <p><%= @budget_request.tamuAffilliation %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Travel Form Password:</h5>
+                <p><%= @budget_request.travelFormPassowrd %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Request Description:</h5>
+                <p><%= @budget_request.requestDescription %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Receipt:</h5>
+                <p>
+                  <% if @budget_request.images.attached? %>
+                    <div style="width:400px;height:400px;">
+                      <% @budget_request.images.each do |image| %>
+                        <%= image_tag(image, style: 'width:100%;height: auto') %>
+                        <%= image.filename%>
+                      <% end %>
+                    </div>
+                  <% end %>
+                    <%= "Not provided" if not @budget_request.images.attached? %>
+                </p>
+            </div>
+            <div class="form group my-2">
+                <h5>Comments:</h5>
+                <p><%= @budget_request.comments %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Status:</h5>
+                <p><%= @budget_request.status %></p>
+            </div>
+            <div class="form group my-2">
+                <h5>Total Price:</h5>
+                <p><%= @budget_request.totalPrice %></p>
+            </div>
+
+        </div>
     </div>
-</div>
+</body>
+
+</html>
