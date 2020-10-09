@@ -62,10 +62,10 @@
                     <h2>Here are all your budget requests</h2>
                     <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
                     <p>
-                      <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-                      <%= form.select :selectType, ["Date", "Status", "Individual Name"] %>
-                      <%= form.submit "Sort By" %>
-                      <% end %>
+                        <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                        <%= form.select :selectType, ["Date", "Status", "Individual Name"] %>
+                        <%= form.submit "Sort By" %>
+                        <% end %>
                     </p>
                     <table class="listing container p-2 my-2" summary="budget_request list">
                         <tr class="header">
@@ -90,11 +90,11 @@
                             <td class="center">
                                 <%= br.requestDate %>
                             </td>
-                            <% if br.status == 'submitted'%>
+                            <% if br.status == 'Submitted'%>
                             <td class="center submit">
-                                <% elsif br.status == 'processed'%>
+                                <% elsif br.status == 'Processed'%>
                             <td class="center processed">
-                                <% elsif br.status == 'processing'%>
+                                <% elsif br.status == 'Processing'%>
                             <td style="center processing">
                                 <% end %>
                                 <%= br.status %>
