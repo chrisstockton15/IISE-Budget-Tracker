@@ -1,6 +1,15 @@
 class IiseBudgetTrackerController < ApplicationController
 	def index
 		@budget_request = BudgetRequest.order(:requestDate)
+		if params[:selectType] && params[:selectType] == "Date"
+			@budget_request = BudgetRequest.order(:requestDate)
+		end
+		if params[:selectType] && params[:selectType] == "Status"
+			@budget_request = BudgetRequest.order(:status)
+		end
+		if params[:selectType] && params[:selectType] == "Individual Name"
+			@budget_request = BudgetRequest.order(:individualName)
+		end
 	end
 
 	def show
