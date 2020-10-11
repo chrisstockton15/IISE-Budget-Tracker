@@ -74,6 +74,7 @@
                       <% @budget_request.images.each do |image| %>
                         <%= image_tag(image, style: 'width:100%;height: auto') %>
                         <%= image.filename%>
+                        <%= link_to image.filename, rails_blob_path(image, disposition: 'attachment') %>
                       <% end %>
                     </div>
                   <% end %>
