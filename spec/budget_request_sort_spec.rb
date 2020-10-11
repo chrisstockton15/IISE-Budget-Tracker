@@ -26,32 +26,19 @@ describe 'Sort Budget Request By Status', type: :system do
 		expect(page).to have_content("B")
 		expect(page).to have_content("C")
 
-		select('submitted', :from=>'selectType')
-		click_on 'Filter'
+		select('Date', :from=>'selectType')
+		click_on 'Sort By'
 		sleep(2)
 		expect(page).to have_content("A")
-		#expect(page).not_to have_content("processing")
-		#expect(page).to have_no_content("processed")
 
-		select('processing', :from=>'selectType')
-		click_on 'Filter'
+		select('Status', :from=>'selectType')
+		click_on 'Sort By'
 		sleep(2)
 		expect(page).to have_content("B")
-		#expect(page).to have_no_content("submitted")
-		#expect(page).to have_no_content("processed")
 
-		select('processed', :from=>'selectType')
-		click_on 'Filter'
+		select('Individual Name', :from=>'selectType')
+		click_on 'Sort By'
 		sleep(2)
-		expect(page).to have_content("C")
-		#expect(page).to have_no_content("submitted")
-		#expect(page).to have_no_content("processing")
-
-		select('all', :from=>'selectType')
-		click_on 'Filter'
-		sleep(2)
-		expect(page).to have_content("A")
-		expect(page).to have_content("B")
 		expect(page).to have_content("C")
 	end
 end
