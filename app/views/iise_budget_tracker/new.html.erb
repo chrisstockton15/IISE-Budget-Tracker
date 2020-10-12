@@ -18,67 +18,67 @@
             <h2>Create Budget Request</h2>
             <%= form_for @budget_request, url: iise_budget_tracker_index_path(@budget_request), html: {:multipart => true, method: :post } do |f| %>
             <div class="form group my-2">
-                <%= f.label "Event Name:" %>
+                <h5><%= f.label "Event Name:" %></h5>
                 <%= f.text_field :eventName, {class:"form-control", placeholder:"Enter name"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Account Number:" %>
+                <h5><%= f.label "Account Number:" %></h5>
                 <%= f.text_field :accountNumber, {class:"form-control", placeholder:"Enter account number"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Sub Account:" %>
+                <h5><%= f.label "Sub Account:" %></h5>
                 <%= f.text_field :subAccount, {class:"form-control", placeholder:"Enter name"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Request Date:" %> <br />
+                <h5><%= f.label "Request Date:" %></h5>
                 <%= f.date_select :requestDate, {class:"form-control"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Indvidual or Business Name:" %>
+                <h5><%= f.label "Indvidual or Business Name:" %></h5>
                 <%= f.text_field :individualName, {class:"form-control", placeholder:"Enter name"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Phone Number:" %>
+                <h5><%= f.label "Phone Number:" %></h5>
                 <%= f.text_field :phoneNumber, {class:"form-control", placeholder:"Enter phone number"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Mailing Address:" %>
+                <h5><%= f.label "Mailing Address:" %></h5>
                 <%= f.text_field :mailingAddress, {class:"form-control", placeholder:"Enter mailing address"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "UIN:" %>
+                <h5><%= "UIN:" %></h5>
                 <%= f.text_field :uin, {class:"form-control", placeholder:"Enter UIN"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Payment Type:" %> <br />
+                <h5><%= f.label "Payment Type:" %></h5>
                 <%= f.select :paymentType, ['Mail to Payee Address', 'Pick up at SOFC', 'Direct Deposit'], {class:"form-control"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Payment Type:" %> <br />
+                <h5><%= f.label "Payment Type:" %></h5>
                 <%= f.select :paymentType, ['Student', 'Employee', 'Not Affiliated'], {class:"form-control"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Travel Form Password:" %>
+                <h5><%= f.label "Travel Form Password:" %></h5>
                 <%= f.text_field :travelFormPassowrd, {class:"form-control", placeholder:"Enter Travel Form Password"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Statement of Purpose:" %>
-                <%= f.text_field :requestDescription, {class:"form-control", placeholder:"Enter statement of purpose"}%>
+                <h5><%= f.label "Request Description:" %></h5>
+                <%= f.text_field :requestDescription, {class:"form-control", placeholder:"Enter request description"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Upload Receipt:" %> <br />
+                <h5><%= f.label "Upload Receipt:" %></h5>
                 <%= f.file_field :images, multiple: true %>
             </div>
             <div class="form group my-2">
-                <%= f.label "Comments:" %>
+                <h5><%= f.label "Comments:" %></h5>
                 <%= f.text_field :comments, {class:"form-control", placeholder:"Enter comments"}%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Status:" %> <br />
+                <h5><%= f.label "Status:" %></h5>
                 <%= f.select :status, ['Submitted', 'Processing', 'Processed', 'Denied', 'Needs Review']%>
             </div>
             <div class="form group my-2">
-                <%= f.label "Total Price:" %> <br />
+                <h5><%= f.label "Total Price:" %></h5>
                 <%= f.number_field :totalPrice, value: number_to_currency(f.object.totalPrice.to_f, delimiter: '', unit: ''), step: :any %>
             </div>
             <div class="form-buttons my-4">

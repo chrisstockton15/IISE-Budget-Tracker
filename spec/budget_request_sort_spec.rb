@@ -8,17 +8,17 @@ describe 'Sort Budget Request By Status', type: :system do
 	it 'Sort by each type' do
 		visit iise_budget_tracker_index_path
 		click_on 'Create New Budget Request'
-		select('submitted', :from=>'budget_request_status')
+		select('Submitted', :from=>'budget_request_status')
 		fill_in 'budget_request_requestDescription', with: 'A'
 		click_on 'Create Budget Request'
 
 		click_on 'Create New Budget Request'
-		select('processing', :from=>'budget_request_status')
+		select('Processing', :from=>'budget_request_status')
 		fill_in 'budget_request_requestDescription', with: 'B'
 		click_on 'Create Budget Request'
 
 		click_on 'Create New Budget Request'
-		select('processed', :from=>'budget_request_status')
+		select('Processed', :from=>'budget_request_status')
 		fill_in 'budget_request_requestDescription', with: 'C'
 		click_on 'Create Budget Request'
 

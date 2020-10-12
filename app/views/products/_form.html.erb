@@ -1,22 +1,20 @@
 <%# error_messages_for(f.object) %>
 
-<table summary="Product form fields">
-  <tr>
-    <th>Item</th>
-    <td><%= f.text_field(:description) %></td>
-  </tr>
-  <tr>
-    <th>Type</th>
-    <td>
-      <%= f.select(:expense_type, ['Travel','Food','Office Supplies','Utilities','Membership','Service and Other Income','Clothing','Rent','Other Expenses','Items for Resale']) %>
-    </td>
-  </tr>
-  <tr>
-    <th>Quantity</th>
-    <td><%= f.text_field(:quantity) %></td>
-  </tr>
-  <tr>
-    <th>Price</th>
-    <td><%= f.text_field(:price) %></td>
-  </tr>
-</table>
+<div class="Product form fields container p-2 my-2">
+    <div class="form group my-2">
+        <h5><%= f.label "Item:" %></h5>
+        <%= f.text_field :description, {class:"form-control", placeholder:"Enter item"} %>
+    </div>
+    <div class="form group my-2">
+        <h5><%= f.label "Type:" %></h5>
+        <%= f.select(:expense_type, ['Travel','Food','Office Supplies','Utilities','Membership','Service and Other Income','Clothing','Rent','Other Expenses','Items for Resale']) %>
+    </div>
+    <div class="form group my-2">
+        <h5><%= f.label "Quantity:" %></h5>
+        <%= f.text_field :quantity, {class:"form-control", placeholder:"Enter quantity"} %>
+    </div>
+    <div class="form group my-2">
+        <h5><%= f.label "Price:" %></h5>
+        <%= f.text_field :price, {class:"form-control", placeholder:"Enter price"} %>
+    </div>
+</div>
