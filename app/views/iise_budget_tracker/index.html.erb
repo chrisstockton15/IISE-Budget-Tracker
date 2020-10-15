@@ -4,6 +4,11 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
                 <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+                <% if current_user %>
+                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+                <% else %>
+                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
+                <% end %>
             </ul>
         </div>
 </nav>
@@ -21,7 +26,7 @@
     <div class="budget request index">
         <h2>Budget Statistics</h2>
 
-    <%   
+    <%
     submittedTotal = 0
     processingTotal = 0
     processedTotal = 0
@@ -35,7 +40,7 @@
             processingTotal += br.totalPrice
             elsif br.status == 'processed'
             processedTotal += br.totalPrice
-            end 
+            end
         %>
      <% end %>
 
@@ -62,15 +67,15 @@
             <p hidden>
                 <%=
                 if not br.equal?(@budget_request.last)
-                grandTotal += br.totalPrice
+                # grandTotal += br.totalPrice
                 end
                 %>
             </p>
             <p>
                 <%=
                 if br.equal?(@budget_request.last)
-                grandTotal += br.totalPrice
-                @totalDisplay = "Total Spent: $" + grandTotal.to_s
+                # grandTotal += br.totalPrice
+                # @totalDisplay = "Total Spent: $" + grandTotal.to_s
                 end
                 %>
             </p>
