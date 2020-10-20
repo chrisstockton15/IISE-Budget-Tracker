@@ -1,4 +1,7 @@
-<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light px-5">
+<html class="bg-light">
+
+<body class="bg-light">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
         <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
@@ -11,20 +14,21 @@
                 <% end %>
             </ul>
         </div>
-</nav>
+    </nav>
 
-<div class="container p-2 my-2 border">
-    <div class="disclaimer">
-        <td>By entering this system and entering any data requested, I am giving my consent to share data related to
-            my involvement with the student organization. Should I no longer wish to share the data I've provided,
-            I will notify the student organization.
-        </td>
+    <div class="container p-2 my-2 border">
+        <div class="disclaimer">
+            <td>By entering this system and entering any data requested, I am giving my consent to share data related to
+                my involvement with the student organization. Should I no longer wish to share the data I've provided,
+                I will notify the student organization.
+            </td>
+        </div>
     </div>
-</div>
 
-<div class="container p-2 my-2">
-    <div class="budget request index">
-        <h2>Budget Statistics</h2>
+    <div class="container p-2 my-2">
+        <div class="budget request index">
+            <h2>Budget Statistics</h2>
+
 
     <%
     submittedTotal = 0
@@ -32,15 +36,17 @@
     processedTotal = 0
     %>
 
-     <% @budget_request.each do |br| %>
-        <%
-            if br.status == 'submitted'
+
+            <% @budget_request.each do |br| %>
+            <%
+            if br.status == 'Submitted'
             submittedTotal += br.totalPrice
-            elsif br.status == 'processing'
+            elsif br.status == 'Processing'
             processingTotal += br.totalPrice
-            elsif br.status == 'processed'
+            elsif br.status == 'Processed'
             processedTotal += br.totalPrice
             end
+
         %>
      <% end %>
 
@@ -49,72 +55,85 @@
 <p>Submitted: $<%= submittedTotal %></p>
 
 
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        Processed: $<%= processedTotal %>
+                    </div>
+                    <div class="col">
+                        Processing: $<%= processingTotal %>
+                    </div>
+                    <div class="col">
+                        Submitted: $<%= submittedTotal %>
+                    </div>
+                </div>
+            </div>
 
-<div class="container p-2 my-2">
-    <div class="budget request index">
-        <h2>Here are all your budget requests</h2>
-        <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
-        <table class="listing container p-2 my-2" summary="budget_request list">
-            <tr class="header">
-                <th>Request Description</th>
-                <th>Individual Name</th>
-                <th>Request Date</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-            <% @budget_request.each do |br| %>
-            <!-- Add totals, only display once all added -->
-            <p hidden>
-                <%=
-                if not br.equal?(@budget_request.last)
-                # grandTotal += br.totalPrice
-                end
-                %>
-            </p>
-            <p>
-                <%=
-                if br.equal?(@budget_request.last)
-                # grandTotal += br.totalPrice
-                # @totalDisplay = "Total Spent: $" + grandTotal.to_s
-                end
-                %>
-            </p>
-            <tr>
-                <td class="center">
-                    <%= br.requestDescription %>
-                </td>
-                <td class="center">
-                    <%= br.individualName %>
-                </td>
-                <td class="center">
-                    <%= br.requestDate %>
-                </td>
-                <td class="center">
-                    <% if br.status == 'submitted'%>
-                    <p style = "color:#500000">
-                    <% elsif br.status == 'processed'%>
-                    <p style = "color:#00FF00">
-                    <% elsif br.status == 'processing'%>
-                    <p style ="color:#006400"> </style>
-                    <% end %>
-                    <%= br.status %>
-                </td>
-                <td class="actions">
-                    <button type="button" class="btn">
-                        <%= link_to("Show", iise_budget_tracker_path(br), :class => 'action show') %>
-                    </button>
-                    <button type="button" class="btn">
-                        <%= link_to("Edit", edit_iise_budget_tracker_path(br), :class => 'action edit') %>
-                    </button>
-                    <button type="button" class="btn">
-                        <%= link_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
-                    </button>
-                    <button type="button" class="btn">
-                        <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
-                    </button>
-                </td>
-            </tr>
-            <% end %>
-        </table>
+
+
+            <div class="container p-2 my-2">
+                <div class="budget request index">
+                    <h2>Here are all your budget requests</h2>
+                    <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
+                    <p>
+                        <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                        <%= form.select :selectType, ["Date", "Status", "Individual Name"] %>
+                        <%= form.submit "Sort By" %>
+                        <% end %>
+                    </p>
+                    <table class="listing container p-2 my-2" summary="budget_request list">
+                        <tr class="header">
+                            <th>Event Name</th>
+                            <th>Request Description</th>
+                            <th>Individual Name</th>
+                            <th>Request Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        <% @budget_request.each do |br| %>
+                        <tr>
+                            <td class="center">
+                                <%= br.eventName %>
+                            </td>
+                            <td class="center">
+                                <%= br.requestDescription %>
+                            </td>
+                            <td class="center">
+                                <%= br.individualName %>
+                            </td>
+                            <td class="center">
+                                <%= br.requestDate %>
+                            </td>
+                            <% if br.status == 'Submitted'%>
+                            <td class="center submit">
+                                <% elsif br.status == 'Processed'%>
+                            <td class="center processed">
+                                <% elsif br.status == 'Processing'%>
+                            <td style="center processing">
+                                <% end %>
+                                <%= br.status %>
+                            </td>
+                            <td class="actions">
+                                <button type="button" class="btn">
+                                    <%= link_to("Show", iise_budget_tracker_path(br), :class => 'action show') %>
+                                </button>
+                                <button type="button" class="btn">
+                                    <%= link_to("Edit", edit_iise_budget_tracker_path(br), :class => 'action edit') %>
+                                </button>
+                                <button type="button" class="btn">
+                                    <%= link_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </button>
+                                <button type="button" class="btn">
+                                    <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
+                                </button>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+
+</html>

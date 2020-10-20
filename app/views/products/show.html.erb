@@ -1,27 +1,44 @@
-<% @product_title = "List of Items" %>
+<html class="bg-light">
 
-<%= link_to("<< Back to List", products_path(:budget_request_id => @budget_request.id), :class => 'back-link') %>
+<body class="bg-light">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom bg-light">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container p-2 my-2">
+        <% @product_title = "List of Items" %>
 
-<div class="products show">
-  <h2>Show Page</h2>
+        <%= link_to("<< Back to List", products_path(:budget_request_id => @budget_request.id), :class => 'back-link') %>
 
-  <table summary="Product detail view">
-    <tr>
-      <th>Item</th>
-      <td><%= @product.description %></td>
-    </tr>
-    <tr>
-      <th>Type</th>
-      <td><%= @product.expense_type %></td>
-    </tr>
-    <tr>
-      <th>Quantity</th>
-      <td><%= @product.quantity %></td>
-    </tr>
-    <tr>
-      <th>Price</th>
-      <td><%= @product.price %></td>
-    </tr>
-  </table>
+        <div class="products show">
+            <h2>Show Page</h2>
 
-</div>
+            <div class="Product detail view container p-2 my-2">
+                <div class="form group my-2">
+                    <h5>Item:</h5>
+                    <p><%= @product.description %></p>
+                </div>
+                <div class="form group my-2">
+                    <h5>Type:</h5>
+                    <p><%= @product.expense_type %></p>
+                </div>
+                <div class="form group my-2">
+                    <h5>Quantity:</h5>
+                    <p><%= @product.quantity %></p>
+                </div>
+                <div class="form group my-2">
+                    <h5>Price:</h5>
+                    <p><%= @product.price %></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

@@ -38,7 +38,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'paperclip'
 gem 'cocoon'
 
-gem 'webpacker', '~> 5.x'
+gem 'webpacker', '~> 5.1.1'
 
 gem 'bootstrap', '~> 4.5.0'
 gem 'jquery-rails'
