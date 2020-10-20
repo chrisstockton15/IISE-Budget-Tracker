@@ -43,6 +43,8 @@ gem 'webpacker', '~> 5.1.1'
 gem 'bootstrap', '~> 4.5.0'
 gem 'jquery-rails'
 
+gem 'devise'
+
 gem 'activestorage', '~> 6.0', '>= 6.0.3.3'
 gem 'mini_magick', '~> 4.10', '>= 4.10.1'
 #gem 'image_processing', '~> 1.2'
