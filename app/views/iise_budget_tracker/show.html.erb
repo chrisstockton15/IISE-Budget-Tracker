@@ -69,16 +69,16 @@
             <div class="form group my-2">
                 <h5>Receipt:</h5>
                 <p>
-                  <% if @budget_request.images.attached? %>
-                    <div style="width:400px;height:400px;">
-                      <% @budget_request.images.each do |image| %>
-                        <%= image_tag(image, style: 'width:100%;height: auto') %>
-                        <%= image.filename%>
-                        <%= link_to image.filename, rails_blob_path(image, disposition: 'attachment') %>
-                      <% end %>
-                    </div>
-                  <% end %>
-                    <%= "Not provided" if not @budget_request.images.attached? %>
+                    <% if @budget_request.images.attached? %>
+                <div style="width:400px;height:400px;">
+                    <% @budget_request.images.each do |image| %>
+                    <%= image_tag(image, style: 'width:100%;height: auto') %>
+                    <%= image.filename%>
+                    <%= link_to image.filename, rails_blob_path(image, disposition: 'attachment') %>
+                    <% end %>
+                </div>
+                <% end %>
+                <%= "Not provided" if not @budget_request.images.attached? %>
                 </p>
             </div>
             <div class="form group my-2">

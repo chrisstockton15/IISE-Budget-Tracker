@@ -8,7 +8,7 @@
                 <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
                 <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
                 <% if current_user %>
-                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, :method => 'delete', class: "nav-link" %></li>
                 <% else %>
                 <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
                 <% end %>
@@ -30,7 +30,7 @@
             <h2>Budget Statistics</h2>
 
 
-    <%
+            <%
     submittedTotal = 0
     processingTotal = 0
     processedTotal = 0
@@ -48,11 +48,7 @@
             end
 
         %>
-     <% end %>
-
-<p>Processed: $<%= processedTotal %></p>
-<p>Processing: $<%= processingTotal %></p>
-<p>Submitted: $<%= submittedTotal %></p>
+            <% end %>
 
 
             <div class="container">
