@@ -1,92 +1,155 @@
-<div class="container p-2 my-2 border">
-    <div class="disclaimer">
-        <td>By entering this system and entering any data requested, I am giving my consent to share data related to
+<html class="bg-light">
 
-            my involvement with the student organization. Should I no longer wish to share the data I've provided,
+<body class="bg-light">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+            </ul>
+        </div>
+    </nav>
 
-            I will notify the student organization.
-        </td>
+    <div class="container p-2 my-2 border">
+        <div class="disclaimer">
+            <td>By entering this system and entering any data requested, I am giving my consent to share data related to
+                my involvement with the student organization. Should I no longer wish to share the data I've provided,
+                I will notify the student organization.
+            </td>
+        </div>
     </div>
-</div>
 
-<div class="container p-2 my-2">
-    <div class="budget request index">
-        <h2>Budget Statistics</h2>
+    <div class="container p-2 my-2">
+        <div class="budget request index">
+            <h2>Budget Statistics</h2>
 
-    <%   
-    submittedTotal = 0
-    processingTotal = 0
-    processedTotal = 0
-    %>
+            <%
+            submittedTotal = 0
+            processingTotal = 0
+            processedTotal = 0
+            %>
 
-     <% @budget_request.each do |br| %>
-        <%
-            if br.status == 'submitted'
-            submittedTotal += br.totalPrice
-            elsif br.status == 'processing'
-            processingTotal += br.totalPrice
-            elsif br.status == 'processed'
-            processedTotal += br.totalPrice
-            end 
-        %>
-     <% end %>
-
-<p>Processed: $<%= processedTotal %></p>
-<p>Processing: $<%= processingTotal %></p>
-<p>Submitted: $<%= submittedTotal %></p>
-
-
-
-<div class="container p-2 my-2">
-    <div class="budget request index">
-        <h2>Here are all your budget requests</h2>
-        <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
-        <table class="listing container p-2 my-2" summary="budget_request list">
-            <tr class="header">
-                <th>Request Description</th>
-                <th>Individual Name</th>
-                <th>Request Date</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
             <% @budget_request.each do |br| %>
+            <%
+            if br.status == 'Submitted'
+            submittedTotal += br.totalPrice
+            elsif br.status == 'Processing'
+            processingTotal += br.totalPrice
+            elsif br.status == 'Processed'
+            processedTotal += br.totalPrice
+            end
+
+            time = Time.new
+            hr = time.hour
+            ampm = "am"
+            if hr > 12
+                hr -= 12
+                ampm = "pm"
+            end
+
+            min = time.min.to_s
+            if time.min.to_s.length == 1
+                min = "0" + min
+            end
+
             
-            <tr>
-                <td class="center">
-                    <%= br.requestDescription %>
-                </td>
-                <td class="center">
-                    <%= br.individualName %>
-                </td>
-                <td class="center">
-                    <%= br.requestDate %>
-                </td>
-                <td class="center">
-                    <% if br.status == 'submitted'%>
-                    <p style = "color:#500000">
-                    <% elsif br.status == 'processed'%>
-                    <p style = "color:#00FF00">
-                    <% elsif br.status == 'processing'%>
-                    <p style ="color:#006400"> </style>
-                    <% end %>
-                    <%= br.status %>
-                </td>
-                <td class="actions">
-                    <button type="button" class="btn">
-                        <%= link_to("Show", iise_budget_tracker_path(br), :class => 'action show') %>
-                    </button>
-                    <button type="button" class="btn">
-                        <%= link_to("Edit", edit_iise_budget_tracker_path(br), :class => 'action edit') %>
-                    </button>
-                    <button type="button" class="btn">
-                        <%= link_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
-                    </button>
-                    <button type="button" class="btn">
-                        <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
-                    </button>
-                </td>
-            </tr>
+
+            File.write("public/BUDGET_LOGS.csv", 
+                "Generated at " + hr.to_s + ":" + min + ampm + " on " + time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s + "\n")
+            File.write("public/BUDGET_LOGS.csv", 
+                "Event name, Account Number, Sub Account, Request Date, Individual Name, Phone Number, Mailing Address, UIN, Travel Form Password, Request Description, Comments, Status, Total Price", mode: "a")
+            %>
             <% end %>
-        </table>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        Processed: $<%= processedTotal %>
+                    </div>
+                    <div class="col">
+                        Processing: $<%= processingTotal %>
+                    </div>
+                    <div class="col">
+                        Submitted: $<%= submittedTotal %>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container p-2 my-2">
+                <div class="budget request index">
+                    <h2>Here are all your budget requests</h2>
+                    <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
+                    <p>
+                        <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                        <%= form.select :selectType, ["Date", "Status", "Individual Name"] %>
+                        <%= form.submit "Sort By" %>
+                        <% end %>
+                    </p>
+                    <table class="listing container p-2 my-2" summary="budget_request list">
+                        <tr class="header">
+                            <th>Event Name</th>
+                            <th>Request Description</th>
+                            <th>Individual Name</th>
+                            <th>Request Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        <% @budget_request.each do |br| %>
+
+
+
+<%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
+
+
+<% File.write("public/BUDGET_LOGS.csv", "\n" + xlsxInfo, mode: "a") %>
+
+                        <tr>
+                            <td class="center">
+                                <%= br.eventName %>
+                            </td>
+                            <td class="center">
+                                <%= br.requestDescription %>
+                            </td>
+                            <td class="center">
+                                <%= br.individualName %>
+                            </td>
+                            <td class="center">
+                                <%= br.requestDate %>
+                            </td>
+                            <% if br.status == 'Submitted'%>
+                            <td class="center submit">
+                                <% elsif br.status == 'Processed'%>
+                            <td class="center processed">
+                                <% elsif br.status == 'Processing'%>
+                            <td style="center processing">
+                                <% end %>
+                                <%= br.status %>
+                            </td>
+                            <td class="actions">
+                                <button type="button" class="btn">
+                                    <%= link_to("Show", iise_budget_tracker_path(br), :class => 'action show') %>
+                                </button>
+                                <button type="button" class="btn">
+                                    <%= link_to("Edit", edit_iise_budget_tracker_path(br), :class => 'action edit') %>
+                                </button>
+                                <button type="button" class="btn">
+                                    <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                </button>
+                                <button type="button" class="btn">
+                                    <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
+                                </button>
+                            </td>
+                        </tr>
+                        <% end %>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+
+<a href="BUDGET_LOGS.csv" download="BUDGET_LOGS.csv">Download</a>
+
+</html>
