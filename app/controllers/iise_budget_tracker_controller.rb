@@ -1,6 +1,8 @@
 class IiseBudgetTrackerController < ApplicationController
+  	before_action :authenticate_user!, except: [:index]
 	def index
 		@budget_request = BudgetRequest.order(:requestDate)
+		
 		if params[:selectType] && params[:selectType] == "Date"
 			@budget_request = BudgetRequest.order(:requestDate)
 		end
@@ -27,6 +29,7 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def create	
 		#create budget_request
+		@user.users = current_user
 		@budget_request = BudgetRequest.create(budget_request_params)
 		if @budget_request.save
 			redirect_to(iise_budget_tracker_index_path)
