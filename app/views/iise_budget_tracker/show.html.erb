@@ -73,10 +73,9 @@
                 <h5>Receipt:</h5>
                 <p>
                     <% if @budget_request.images.attached? %>
-                <div style="width:400px;height:400px;">
+                <div style="width:400px;height:auto;">
                     <% @budget_request.images.each do |image| %>
                     <%= image_tag(image, style: 'width:100%;height: auto') %>
-                    <%= image.filename%>
                     <%= link_to image.filename, rails_blob_path(image, disposition: 'attachment') %>
                     <% end %>
                 </div>
@@ -99,54 +98,54 @@
 
         </div>
         <div class="form group my-2">
-          <p>        
-            <% payment_options = ['','',''] %>
-            <% affiliation_options = ['','','']%>
-            <% travel = ['',''] %>
-            <% if @budget_request.travelFormPassowrd %>
-              <% travel[0] = @budget_request.travelFormPassowrd[0,5] %>
-              <% travel[1] = @budget_request.travelFormPassowrd[5,10] %>
-            <% end %>
+            <p>
+                <% payment_options = ['','',''] %>
+                <% affiliation_options = ['','','']%>
+                <% travel = ['',''] %>
+                <% if @budget_request.travelFormPassowrd %>
+                <% travel[0] = @budget_request.travelFormPassowrd[0,5] %>
+                <% travel[1] = @budget_request.travelFormPassowrd[5,10] %>
+                <% end %>
 
 
-            <% if @budget_request.paymentType == 'Mail to Payee Address' %>
-              <% payment_options[0] = 'Yes'%>
-            <% elsif @budget_request.paymentType == 'Pick up at SOFC' %>
-              <% payment_options[1] = 'Yes' %>
-            <% elsif @budget_request.paymentType == 'Direct Deposit' %>
-              <% payment_options[2] = 'Yes' %>
-            <% end %>
+                <% if @budget_request.paymentType == 'Mail to Payee Address' %>
+                <% payment_options[0] = 'Yes'%>
+                <% elsif @budget_request.paymentType == 'Pick up at SOFC' %>
+                <% payment_options[1] = 'Yes' %>
+                <% elsif @budget_request.paymentType == 'Direct Deposit' %>
+                <% payment_options[2] = 'Yes' %>
+                <% end %>
 
-            <% if @budget_request.tamuAffilliation == 'Student' %>
-              <% affiliation_options[0] = 'Yes'%>
-            <% elsif @budget_request.tamuAffilliation == 'Employee' %>
-              <% affiliation_options[1] = 'Yes' %>
-            <% elsif @budget_request.tamuAffilliation == 'Not Affiliated' %>
-              <% affiliation_options[2] = 'Yes' %>
-            <% end %>
-            
-            <% categories = Hash["Travel" => 0,"Food" => 0, "Office Supplies" => 0, \
+                <% if @budget_request.tamuAffilliation == 'Student' %>
+                <% affiliation_options[0] = 'Yes'%>
+                <% elsif @budget_request.tamuAffilliation == 'Employee' %>
+                <% affiliation_options[1] = 'Yes' %>
+                <% elsif @budget_request.tamuAffilliation == 'Not Affiliated' %>
+                <% affiliation_options[2] = 'Yes' %>
+                <% end %>
+
+                <% categories = Hash["Travel" => 0,"Food" => 0, "Office Supplies" => 0, \
             "Utilities" => 0, "Membership" => 0, "Service and Other Income" => 0, \
             "Clothing" => 0, "Rent" => 0, "Other Expenses" => 0, "Items for Resale" => 0] %>
 
-            <% sum = 0%>
-            <% @budget_request.products.each do |product| %>
-              <% categories[product.expense_type] += product.price%>
-              <% sum += product.price%>
-            <% end %>
+                <% sum = 0%>
+                <% @budget_request.products.each do |product| %>
+                <% categories[product.expense_type] += product.price%>
+                <% sum += product.price%>
+                <% end %>
 
-            <% categories.each do |category,value| %>
-              <% if value == 0 %>
+                <% categories.each do |category,value| %>
+                <% if value == 0 %>
                 <% categories[category] = ''%>
-              <% else %>
+                <% else %>
                 <% categories[category] = '$%.02f' %categories[category].to_f.round(3) %>
-              <% end %>
-            <% end %>
+                <% end %>
+                <% end %>
 
-            <% require 'pdf-forms' %>
-            <% pdftk = PdfForms.new('C:\Program Files (x86)\PDFtk\bin\pdftk.exe') %>
+                <% require 'pdf-forms' %>
+                <% pdftk = PdfForms.new('C:\Program Files (x86)\PDFtk\bin\pdftk.exe') %>
 
-            <% pdftk.fill_form 'public/pdf/SOFC.pdf', 'public/pdf/out'+ @budget_request.id.to_s + '.pdf', \
+                <% pdftk.fill_form 'public/pdf/SOFC.pdf', 'public/pdf/out'+ @budget_request.id.to_s + '.pdf', \
             :"Student Organization Name" => 'IISE', \
             :"Individual or Business Name" => @budget_request.individualName, \
             :"Account Number" => @budget_request.accountNumber, :"Sub-Account" => @budget_request.subAccount, \
@@ -156,7 +155,7 @@
             :"UIN" => @budget_request.uin, :"Mail" => payment_options[0] ,:"Pick up" => payment_options[1], \
             :"Direct Deposit" => payment_options[2], :"Travel1" => travel[0], \
             :"Travel2" => travel[1], \
-            :"Statement" => 'Message about request', :"3410" =>categories["Travel"], \
+            :"Statement" => @budget_request.requestDescription, :"3410" =>categories["Travel"], \
             :"6339" =>categories["Food"], \
             :"4014" =>categories["Office Supplies"], \
             :"5025" =>categories["Utilities"], \
@@ -167,13 +166,13 @@
             :"6335" =>categories["Other Expenses"], \
             :"6901" =>categories["Items for Resale"]%>
 
-            <%= link_to("Download Request", download_pdf_path(@budget_request.id)) %>
-        
-      </p>
+                <%= link_to("Download Request", download_pdf_path(@budget_request.id)) %>
+
+            </p>
+        </div>
     </div>
-    </div>
-    
-    
+
+
 </body>
 
 </html>
