@@ -7,11 +7,6 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
                 <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
-                <% if current_user %>
-                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-                <% else %>
-                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
-                <% end %>
             </ul>
         </div>
     </nav>
@@ -31,11 +26,10 @@
 
 
             <%
-    submittedTotal = 0
-    processingTotal = 0
-    processedTotal = 0
-    %>
-
+            submittedTotal = 0
+            processingTotal = 0
+            processedTotal = 0
+            %>
 
             <% @budget_request.each do |br| %>
             <%
@@ -47,9 +41,26 @@
             processedTotal += br.totalPrice
             end
 
-        %>
-            <% end %>
 
+            time = Time.new
+            hr = time.hour
+            ampm = "am"
+            if hr > 12
+                hr -= 12
+                ampm = "pm"
+            end
+
+            min = time.min.to_s
+            if time.min.to_s.length == 1
+                min = "0" + min
+            end
+
+            File.write("public/BUDGET_LOGS.csv", 
+                "Generated at " + hr.to_s + ":" + min + ampm + " on " + time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s + "\n")
+            File.write("public/BUDGET_LOGS.csv", 
+                "Event name, Account Number, Sub Account, Request Date, Individual Name, Phone Number, Mailing Address, UIN, Travel Form Password, Request Description, Comments, Status, Total Price", mode: "a")
+            %>
+            <% end %>
 
             <div class="container">
                 <div class="row">
@@ -64,7 +75,6 @@
                     </div>
                 </div>
             </div>
-
 
 
             <div class="container p-2 my-2">
@@ -87,6 +97,14 @@
                             <th>Action</th>
                         </tr>
                         <% @budget_request.each do |br| %>
+
+
+
+<%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
+
+
+<% File.write("public/BUDGET_LOGS.csv", "\n" + xlsxInfo, mode: "a") %>
+
                         <tr>
                             <td class="center">
                                 <%= br.eventName %>
@@ -117,7 +135,7 @@
                                     <%= link_to("Edit", edit_iise_budget_tracker_path(br), :class => 'action edit') %>
                                 </button>
                                 <button type="button" class="btn">
-                                    <%= link_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                    <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </button>
                                 <button type="button" class="btn">
                                     <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
@@ -131,5 +149,7 @@
         </div>
     </div>
 </body>
+
+<a href="BUDGET_LOGS.csv" download="BUDGET_LOGS.csv">Download</a>
 
 </html>
