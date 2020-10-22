@@ -7,6 +7,11 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
                 <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+                <% if current_user %>
+                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+                <% else %>
+                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
+                <% end %>
             </ul>
         </div>
     </nav>
@@ -55,9 +60,9 @@
                 min = "0" + min
             end
 
-            File.write("public/BUDGET_LOGS.csv", 
+            File.write("public/BUDGET_LOGS.csv",
                 "Generated at " + hr.to_s + ":" + min + ampm + " on " + time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s + "\n")
-            File.write("public/BUDGET_LOGS.csv", 
+            File.write("public/BUDGET_LOGS.csv",
                 "Event name, Account Number, Sub Account, Request Date, Individual Name, Phone Number, Mailing Address, UIN, Travel Form Password, Request Description, Comments, Status, Total Price", mode: "a")
             %>
             <% end %>
