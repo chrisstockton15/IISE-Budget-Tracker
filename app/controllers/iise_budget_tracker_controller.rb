@@ -31,7 +31,6 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def create	
 		#create budget_request
-		@user.users = current_user
 		@budget_request = BudgetRequest.create(budget_request_params)
 		if @budget_request.save
 			redirect_to(iise_budget_tracker_index_path)
