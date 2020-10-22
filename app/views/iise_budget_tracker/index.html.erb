@@ -61,8 +61,25 @@
                 "Event name, Account Number, Sub Account, Request Date, Individual Name, Phone Number, Mailing Address, UIN, Travel Form Password, Request Description, Comments, Status, Total Price", mode: "a")
             %>
             <% end %>
-
+            
             <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <% @balance.each do |bal| %>
+                      Max Balance: <%= bal.balanceAmount %>
+                    <% end %>
+                  </div>
+                  <div class="col">
+                    <% @balance.each do |bal| %>
+                      Current Balance: <%= bal.balanceAmount - processedTotal %>
+                    <% end %>
+                  </div>
+                  <div class="col">
+                    <% @balance.each do |bal| %>
+                      Expected Balance: <%= bal.balanceAmount - processedTotal - processingTotal - submittedTotal %>
+                    <% end %>
+                  </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         Processed: $<%= processedTotal %>
@@ -74,6 +91,18 @@
                         Submitted: $<%= submittedTotal %>
                     </div>
                 </div>
+              <div class="row">
+                <% existingRequest = '0' %>
+                <% @balance.each do |bal| %>
+                <button type="button" class="btn">
+                  <%= link_to("Change Max Balance Amount", edit_balance_path(bal), :class => 'action edit') %>
+                  <% existingRequest =" '1'" %>
+                </button>
+                <% end %>
+                <% if (existingRequest == '0') %>
+                  <%= link_to("Set Max Balance Amount", new_balance_path, :class => 'action new') %>
+                <% end %>
+              </div>
             </div>
 
 

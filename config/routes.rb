@@ -14,7 +14,13 @@ Rails.application.routes.draw do
 		member do
 		  get :delete
 		end  
-	  end
+	end
+
+	resources :balance do
+		member do
+		  get :delete
+		end  
+	end
 
 	get 'iise_budget_tracker/iise_budget_tracker/new_item' => 'iise_budget_tracker#new_item', :as => :new_item
 	
