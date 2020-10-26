@@ -105,7 +105,7 @@
 
 
 
-                        <%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
+                        <%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s.tr(',','') + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
 
 
                         <% File.write("public/BUDGET_LOGS.csv", "\n" + xlsxInfo, mode: "a") %>
