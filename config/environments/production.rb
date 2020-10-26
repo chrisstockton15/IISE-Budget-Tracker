@@ -77,7 +77,7 @@ Rails.application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
   # login modification
-  config.action_mailer.default_url_options = {​​​​:host => 'https://iise-budget-tracker.herokuapp.com'}​​​​
+  config.action_mailer.default_url_options = ​​​​:host => 'https://iise-budget-tracker.herokuapp.com'}​​​
   # Use a different logger for distributed setups.
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
