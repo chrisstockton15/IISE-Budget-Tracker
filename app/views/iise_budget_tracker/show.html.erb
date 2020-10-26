@@ -143,7 +143,7 @@
                 <% end %>
 
                 <% require 'pdf-forms' %>
-                <% pdftk = PdfForms.new('C:\Program Files (x86)\PDFtk\bin\pdftk.exe') %>
+                <% pdftk = PdfForms.new("pdftk") %>
 
                 <% pdftk.fill_form 'public/pdf/SOFC.pdf', 'public/pdf/out'+ @budget_request.id.to_s + '.pdf', \
             :"Student Organization Name" => 'IISE', \
