@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+  before_action :authenticate_user!
   before_action :find_budget_request
   before_action :find_budget_requests, :only => [:new, :create, :edit, :update]
 

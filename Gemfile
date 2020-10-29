@@ -49,6 +49,9 @@ gem 'activestorage', '~> 6.0', '>= 6.0.3.3'
 gem 'mini_magick', '~> 4.10', '>= 4.10.1'
 #gem 'image_processing', '~> 1.2'
 
+#To modify PDF forms
+gem 'pdf-forms', '~> 1.3'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
