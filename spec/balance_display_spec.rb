@@ -8,7 +8,14 @@ describe 'Get Balance Totals', type: :system do
 	it 'Set Balances' do
 		
 		visit iise_budget_tracker_index_path
-		click_on 'Set Max Balance Amount'
+		click_on 'Sign In'
+		click_on 'Sign up'
+		fill_in 'user_email', with: 'Testing@mail.com'
+		fill_in 'user_password', with: '123456'
+		fill_in 'user_password_confirmation', with: '123456'
+		click_on 'Sign up'
+
+		click_link 'set'
 		fill_in 'balance_balanceAmount', with: '80'
 		click_on 'Update Balance Amount'
 
@@ -31,9 +38,12 @@ describe 'Get Balance Totals', type: :system do
 		fill_in 'budget_request_totalPrice', with: 30
 		click_on 'Create Budget Request'
 
-		sleep(2)
         expect(page).to have_content("80")
 		expect(page).to have_content("50")
 		expect(page).to have_content("15")
+
+		click_on 'clear'
+		click_on 'Clear Balance'
+		expect(page).to have_content("Set Max Balance Amount")
 	end
 end

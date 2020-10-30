@@ -1,0 +1,31 @@
+<html class="bg-light">
+
+<body class="bg-light">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom bg-light">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container p-2 my-2">
+
+        <div class="balances delete">
+            <h2>Clear Balance</h2>
+
+            <%= form_for(@balance, :url => balance_path, :method => 'delete') do |f| %>
+
+            <p>Are you sure you want to clear the balance?</p>
+
+            <button class="form-buttons btn">
+                <%= f.submit("Clear Balance") %>
+            </button>
+
+            <% end %>
+        </div>
+    </div>
+</body>
+
+</html>

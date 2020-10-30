@@ -34,6 +34,17 @@ class BalanceController < ApplicationController
 		end
 	end
 
+	def delete
+    @balance = Balance.find(params[:id])
+  end
+
+  def destroy
+    @balance = Balance.find(params[:id])
+    @balance.destroy
+    flash[:notice] = "Balance cleared successfully"
+    redirect_to(iise_budget_tracker_index_path)
+  end
+
 	def balance_params
 		params.require(:balance).permit(:balanceAmount)
 	end
