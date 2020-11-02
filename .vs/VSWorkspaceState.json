@@ -3,14 +3,9 @@
     "",
     "\\app",
     "\\app\\controllers",
-    "\\app\\javascript\\packs",
     "\\app\\views",
     "\\app\\views\\layouts",
-    "\\budget_tracker\\app",
-    "\\config\\webpack",
-    "\\lib\\assets",
     "\\spec"
   ],
-  "SelectedNode": "\\spec\\budget_request_filter_spec.rb",
   "PreviewInSolutionExplorer": false
 }

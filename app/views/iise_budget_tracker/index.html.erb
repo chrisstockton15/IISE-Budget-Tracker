@@ -66,8 +66,25 @@
                 "Event name, Account Number, Sub Account, Request Date, Individual Name, Phone Number, Mailing Address, UIN, Travel Form Password, Request Description, Comments, Status, Total Price", mode: "a")
             %>
             <% end %>
-
+            
             <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <% @balance.each do |bal| %>
+                      Max Balance: <%= bal.balanceAmount %>
+                    <% end %>
+                  </div>
+                  <div class="col">
+                    <% @balance.each do |bal| %>
+                      Current Balance: <%= bal.balanceAmount - processedTotal %>
+                    <% end %>
+                  </div>
+                  <div class="col">
+                    <% @balance.each do |bal| %>
+                      Expected Balance: <%= bal.balanceAmount - processedTotal - processingTotal - submittedTotal %>
+                    <% end %>
+                  </div>
+                </div>
                 <div class="row">
                     <div class="col">
                         Processed: $<%= processedTotal %>
@@ -79,6 +96,29 @@
                         Submitted: $<%= submittedTotal %>
                     </div>
                 </div>
+              <div class="row">
+                <% existingRequest = '0' %>
+                <% @balance.each do |bal| %>
+                  <div class="row">
+                    <div class="col-md-auto">
+                      <button type="button" class="btn">
+                        <%= link_to("Change Max Balance Amount", edit_balance_path(bal)) %>
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button type="button" class="btn">
+                        <%= link_to("Clear Max Balance Amount", delete_balance_path(bal), method: :delete, id: "clear") %>
+                        </button>
+                    </div>
+                  </div>
+                  <% existingRequest =" '1'" %>
+                <% end %>
+                <% if (existingRequest == '0') %>
+                  <button type="button" class="btn">
+                    <%= link_to("Set Max Balance Amount", new_balance_path, :class => 'action new', id: "set") %>
+                    </button>
+                <% end %>
+              </div>
             </div>
 
 

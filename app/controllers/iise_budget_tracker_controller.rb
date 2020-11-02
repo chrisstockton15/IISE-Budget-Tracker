@@ -2,7 +2,7 @@ class IiseBudgetTrackerController < ApplicationController
   	before_action :authenticate_user!, except: [:index]
 	def index
 		@budget_request = BudgetRequest.order(:requestDate)
-		
+		@balance = Balance.order(:id)
 		if params[:selectType] && params[:selectType] == "Date"
 			@budget_request = BudgetRequest.order(:requestDate)
 		end

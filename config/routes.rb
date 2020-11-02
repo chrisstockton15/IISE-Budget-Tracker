@@ -13,8 +13,14 @@ Rails.application.routes.draw do
 	resources :products do
 		member do
 		  get :delete
-		end
-	  end
+		end  
+	end
+
+	resources :balance do
+		member do
+		  get :delete
+		end  
+	end
 
 	get 'iise_budget_tracker/iise_budget_tracker/new_item' => 'iise_budget_tracker#new_item', :as => :new_item
 	get 'iise_budget_tracker/download_pdf/:id', to: "iise_budget_tracker#download_pdf", as: :download_pdf
