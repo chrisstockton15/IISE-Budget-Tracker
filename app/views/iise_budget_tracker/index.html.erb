@@ -126,12 +126,24 @@
                 <div class="budget request index">
                     <h2>Here are all your budget requests</h2>
                     <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
-                    <p>
-                        <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-                        <%= form.select :selectType, ["Date", "Status", "Individual Name"] %>
-                        <%= form.submit "Sort By" %>
-                        <% end %>
-                    </p>
+                    <div class = "row">
+                      <div class = "col">
+                        <p>
+                          <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                          <%= form.select :selectType, ["Date", "Status", "Individual Name"], { include_blank: true } %>
+                            <%= form.submit "Sort By" %>
+                          <% end %>
+                        </p>
+                      </div>
+                      <div class = "col">
+                        <p>
+                          <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                          <%= form.select :filterType, User.all.collect {|p| [ p.email, p.id ] }, { include_blank: true } %>
+                          <%= form.submit "Filter By" %>
+                          <% end %>
+                        </p>
+                      </div>
+                    </div>
                     <table class="listing container p-2 my-2" summary="budget_request list">
                         <tr class="header">
                             <th>Event Name</th>
@@ -176,6 +188,14 @@
                                 <% end %>
                                 <%= br.status %>
                             </td>
+                            
+                                <% @temp = "Processed" %>
+                                <% @temp_br = br %>
+                                <% form_for(br, url: change_status_path(id:br.id), method: :patch, local: true) do |form| %>
+                                <% form.select :status, [[br.status], [@temp]] %>
+                                <% form.submit "Update Status" %>
+                                <% end %> 
+                            
                             <td class="actions">
                                 <button type="button" class="btn">
                                     <%= link_to("Show", iise_budget_tracker_path(br), :class => 'action show') %>

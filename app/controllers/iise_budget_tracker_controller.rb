@@ -33,7 +33,7 @@ class IiseBudgetTrackerController < ApplicationController
 		#create budget_request
 		@budget_request = BudgetRequest.create(budget_request_params)
 		if @budget_request.save
-			redirect_to(iise_budget_tracker_index_path)
+			redirect_to(products_path(:budget_request_id => @budget_request.id))
 		else
 			render('new')
 		end
@@ -73,7 +73,11 @@ class IiseBudgetTrackerController < ApplicationController
 		send_data(contents, :filename => filename)
 	end
 
-
+	def change_status
+		@budget_request = BudgetRequest.find_by(:id=>params[:id])
+		@budget_request.update(budget_request_params);
+		redirect_to iise_budget_tracker_index_path
+	end
 
 	def budget_request_params
 		params.require(:budget_request).permit(:eventName, :accountNumber, :subAccount, :requestDate, :individualName, :phoneNumber, :mailingAddress, :uin, :paymentType, 

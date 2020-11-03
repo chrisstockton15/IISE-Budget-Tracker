@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
 	get 'iise_budget_tracker/iise_budget_tracker/new_item' => 'iise_budget_tracker#new_item', :as => :new_item
 	get 'iise_budget_tracker/download_pdf/:id', to: "iise_budget_tracker#download_pdf", as: :download_pdf
+	patch 'iise_budget_tracker/change_status/:id', to: 'iise_budget_tracker#change_status', as: :change_status
 	#get 'iise_budget_tracker/download_pdf/:id', to: 'sites#edit', as: :sites_edit
 
 	
