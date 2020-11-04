@@ -54,6 +54,8 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def destroy 
 		@budget_request = BudgetRequest.find(params[:id])
+		filepath = "#{Rails.root}/public/pdf/request" + @budget_request.id.to_s + ".pdf"
+		File.delete(filepath) if File.exist?(filepath)
 		if @budget_request.present?
 			@budget_request.products.destroy_all
 			@budget_request.destroy
@@ -63,8 +65,8 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def download_pdf
 		@budget_request = BudgetRequest.find(params[:id])
-		filepath = "#{Rails.root}/public/pdf/out" + @budget_request.id.to_s + ".pdf"
-		filename = "out" + @budget_request.id.to_s + ".pdf"
+		filepath = "#{Rails.root}/public/pdf/request" + @budget_request.id.to_s + ".pdf"
+		filename = "request" + @budget_request.id.to_s + ".pdf"
 		file = File.open(filepath, "rb")
 		contents = file.read
 		file.close

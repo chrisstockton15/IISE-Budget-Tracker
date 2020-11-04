@@ -145,7 +145,7 @@
                 <% require 'pdf-forms' %>
                 <% pdftk = PdfForms.new("pdftk") %>
 
-                <% pdftk.fill_form 'public/pdf/SOFC.pdf', 'public/pdf/out'+ @budget_request.id.to_s + '.pdf', \
+                <% pdftk.fill_form 'public/pdf/SOFC.pdf', 'public/pdf/request'+ @budget_request.id.to_s + '.pdf', \
             :"Student Organization Name" => 'IISE', \
             :"Individual or Business Name" => @budget_request.individualName, \
             :"Account Number" => @budget_request.accountNumber, :"Sub-Account" => @budget_request.subAccount, \
