@@ -3,14 +3,6 @@
 <body class="bg-light">
     <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
         <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
-<<<<<<< HEAD
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
-                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
-            </ul>
-        </div>
-=======
        
        <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
@@ -27,7 +19,6 @@
     
     
        
->>>>>>> master
     </nav>
 
     <div class="container p-2 my-2 border">
@@ -43,14 +34,6 @@
         <div class="budget request index">
             <h2>Budget Statistics</h2>
 
-<<<<<<< HEAD
-            <%
-            submittedTotal = 0
-            processingTotal = 0
-            processedTotal = 0
-            %>
-
-=======
 
             <%
             submittedTotal = 0
@@ -58,7 +41,6 @@
             processedTotal = 0
             %>
 
->>>>>>> master
             <% @budget_request.each do |br| %>
             <%
             if br.status == 'Submitted'
@@ -69,10 +51,6 @@
             processedTotal += br.totalPrice
             end
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
             time = Time.new
             hr = time.hour
             ampm = "am"
@@ -86,15 +64,8 @@
                 min = "0" + min
             end
 
-<<<<<<< HEAD
-            
-
-            File.write("public/BUDGET_LOGS.csv", 
-                "Generated at " + hr.to_s + ":" + min + ampm + " on " + time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s + "\n")
-            File.write("public/BUDGET_LOGS.csv", 
-=======
             olddaymonth = File.read("public/OldLog.txt")
-           File.delete(olddaymonth)
+            File.delete(olddaymonth)
             $newdaymonth = (Time.now).strftime("%B") + "_" + time.day.to_s
             File.write("public/OldLog.txt", "public/BUDGET_LOGS_"+$newdaymonth+".csv")
 
@@ -105,7 +76,6 @@
             File.write("public/BUDGET_LOGS_"+$newdaymonth+".csv",
                 "Generated at " + hr.to_s + ":" + min + ampm + " on " + time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s + "\n")
             File.write("public/BUDGET_LOGS_"+$newdaymonth+".csv",
->>>>>>> master
                 "Event name, Account Number, Sub Account, Request Date, Individual Name, Phone Number, Mailing Address, UIN, Travel Form Password, Request Description, Comments, Status, Total Price", mode: "a")
             %>
             <% end %>
@@ -147,19 +117,11 @@
                         <% @budget_request.each do |br| %>
 
 
-<<<<<<< HEAD
-
-<%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
-
-
-<% File.write("public/BUDGET_LOGS.csv", "\n" + xlsxInfo, mode: "a") %>
-=======
         
                         <%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s.tr(',',' ') + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
 
                        
                         <% File.write("public/BUDGET_LOGS_"+$newdaymonth+".csv", "\n" + xlsxInfo, mode: "a") %>
->>>>>>> master
 
                         <tr>
                             <td class="center">
@@ -180,35 +142,28 @@
                             <td class="center processed">
                                 <% elsif br.status == 'Processing'%>
                             <td style="center processing">
-<<<<<<< HEAD
-=======
                                 <% elsif br.status == 'Denied'%>
                             <td style="center denied">
                                 <% elsif br.status == 'Needs Review'%>
                             <td style="center review">
->>>>>>> master
                                 <% end %>
                                 <%= br.status %>
                             </td>
                             <td class="actions">
                                 <button type="button" class="btn">
-                                    <%= link_to("Show", iise_budget_tracker_path(br), :class => 'action show') %>
+                                    <%= link_to(image_tag('receipt_symbol.png', :size => '20x20',:alt => 'show'), iise_budget_tracker_path(br), :class => 'action show') %>
                                 </button>
                                 <button type="button" class="btn">
-                                    <%= link_to("Edit", edit_iise_budget_tracker_path(br), :class => 'action edit') %>
+                                    <%= link_to(image_tag('edit_symbol.png', :size => '20x20',:alt => 'edit'), edit_iise_budget_tracker_path(br), :class => 'action edit') %>
                                 </button>
                                 <button type="button" class="btn">
-<<<<<<< HEAD
-                                    <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
-                                </button>
-                                <button type="button" class="btn">
-                                    <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
-=======
-                                    <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
+                                    <%= link_to image_tag('products_symbol.png', :size => '20x20',:alt => 'show products'), products_path(:budget_request_id => br.id), :class => 'action show' %>
                                 </button>
                                 <button type="button" class="btn">
                                     <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
->>>>>>> master
+                                </button>
+                                <button type="button" class="btn">
+                                    <%= link_to 'Remove', delete_iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
                                 </button>
                             </td>
                         </tr>
@@ -217,14 +172,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-    </div>
-</body>
-
-<a href="BUDGET_LOGS.csv" download="BUDGET_LOGS.csv">Download</a>
-
-</html>
-=======
         <% if user_signed_in? %>   
         
         <a href="BUDGET_LOGS_<%=$newdaymonth%>.csv" 
@@ -234,4 +181,3 @@
 </body>
 
 </html>
->>>>>>> master

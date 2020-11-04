@@ -164,7 +164,8 @@
             :"5755" =>categories["Clothing"], \
             :"5870" =>categories["Rent"], \
             :"6335" =>categories["Other Expenses"], \
-            :"6901" =>categories["Items for Resale"]%>
+            :"6901" =>categories["Items for Resale"], \
+            :"Total" => '$' + sum.to_s%>
 
                 <%= link_to("Download Request", download_pdf_path(@budget_request.id)) %>
 
