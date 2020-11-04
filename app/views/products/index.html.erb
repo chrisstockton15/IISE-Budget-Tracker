@@ -36,13 +36,13 @@
                     <td class="center"><%= product.price %></td>
                     <td class="actions center">
                         <button type="button" class="btn">
-                            <%= link_to("Show", product_path(product,:budget_request_id => @budget_request.id), :class => 'action show') %>
+                            <%= link_to(image_tag('view_symbol.png', :size => '20x20',:alt => 'show product details'), product_path(product,:budget_request_id => @budget_request.id), :class => 'action show') %>
                         </button>
                         <button type="button" class="btn">
-                            <%= link_to("Edit", edit_product_path(product,:budget_request_id => @budget_request.id), :class => 'action edit') %>
+                            <%= link_to(image_tag('edit_symbol.png', :size => '20x20',:alt => 'edit product'), edit_product_path(product,:budget_request_id => @budget_request.id), :class => 'action edit') %>
                         </button>
                         <button type="button" class="btn">
-                            <%= link_to("Delete", delete_product_path(product,:budget_request_id => @budget_request.id), :class => 'action delete') %>
+                            <%= link_to(image_tag('remove_symbol.png', :size => '20x20',:alt => 'remove product'), delete_product_path(product,:budget_request_id => @budget_request.id), :class => 'action delete') %>
                         </button>
                     </td>
                 </tr>
