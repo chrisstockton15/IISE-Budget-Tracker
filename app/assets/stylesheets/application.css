@@ -53,7 +53,7 @@
 }
 
 .updated {
-    color: red
+    color: black
 }
 
 
@@ -63,4 +63,8 @@
 
 .accent {
     background-color: #732F2F
+}
+
+.outerContainer {
+    text-align: center;
 }

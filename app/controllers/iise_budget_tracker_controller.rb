@@ -73,8 +73,8 @@ class IiseBudgetTrackerController < ApplicationController
 
   def download_pdf
     @budget_request = BudgetRequest.find(params[:id])
-    filepath = "#{Rails.root}/public/pdf/out" + @budget_request.id.to_s + '.pdf'
-    filename = 'out' + @budget_request.id.to_s + '.pdf'
+    filepath = "#{Rails.root}/public/pdf/request" + @budget_request.id.to_s + '.pdf'
+    filename = 'request' + @budget_request.id.to_s + '.pdf'
     file = File.open(filepath, 'rb')
     contents = file.read
     file.close
