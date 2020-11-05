@@ -75,8 +75,25 @@
             <% end %>
 
             <div class="container">
-                <div class="row">
-                    <div class="col outerContainer">
+              <div class="row">
+                <div class="col">
+                  <% @balance.each do |bal| %>
+                      Max Balance: <%= bal.balanceAmount %>
+                  <% end %>
+                </div>
+                <div class="col">
+                  <% @balance.each do |bal| %>
+                      Current Balance: <%= bal.balanceAmount - processedTotal %>
+                  <% end %>
+                </div>
+                <div class="col">
+                  <% @balance.each do |bal| %>
+                      Expected Balance: <%= bal.balanceAmount - processedTotal - processingTotal - submittedTotal %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col outerContainer">
                         Processed: $<%= processedTotal %>
                     </div>
                     <div class="col outerContainer">
@@ -85,7 +102,32 @@
                     <div class="col outerContainer">
                         Submitted: $<%= submittedTotal %>
                     </div>
+              </div>
+              <div class="row">
+                <% existingRequest = '0' %>
+                <% @balance.each do |bal| %>
+                <div class="row">
+
+                  <div class="col-md-auto">
+                    <button type="button" class="btn">
+                      <%= link_to("Change Max Balance Amount", edit_balance_path(bal)) %>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button type="button" class="btn">
+                      <%= link_to("Clear Max Balance Amount", delete_balance_path(bal), method: :delete, id: "clear") %>
+                    </button>
+                  </div>
+                    
                 </div>
+                <% existingRequest =" '1'" %>
+                <% end %>
+                <% if (existingRequest == '0') %>
+                <button type="button" class="btn">
+                  <%= link_to("Set Max Balance Amount", new_balance_path, :class => 'action new', id: "set") %>
+                </button>
+                <% end %>
+              </div>
             </div>
 
 
@@ -95,23 +137,24 @@
 
 
                     <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'btn btn-outline-primary') %>
-                    <div class="row">
-                        <div class="col">
-                            <p>
-                                <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-                                <%= form.select :selectType, ["Date", "Status", "Individual Name"], { include_blank: true } %>
-                                <%= form.submit "Sort By" %>
-                                <% end %>
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p>
-                                <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-                                <%= form.select :filterType, User.all.pluck(:email), { include_blank: true } %>
-                                <%= form.submit "Filter By" %>
-                                <% end %>
-                            </p>
-                        </div>
+                    <div class = "row">
+                      <div class = "col">
+                        <p>
+                          <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                          <%= form.select :selectType, ["Date", "Status", "Individual Name"], { include_blank: true } %>
+                            <%= form.submit "Sort By" %>
+                          <% end %>
+                        </p>
+                      </div>
+                      <div class = "col">
+                        <p>
+                          <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                          <%= form.select :filterType, BudgetRequest.all.pluck(:individualName).uniq, { include_blank: true } %>
+                          <%= form.submit "Filter By" %>
+                          <% end %>
+                        </p>
+                      </div>
+
                     </div>
 
                     <table class="listing container-fluid p-2 my-2" summary="budget_request list">
@@ -154,6 +197,7 @@
                                 <% elsif br.status == 'Denied'%>
                             <td class="center bg-danger text-white status">
                                 <% elsif br.status == 'Needs Review'%>
+
                             <td class="center bg-warning text-dark status">
 
                                 <% end %>
