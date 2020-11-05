@@ -3,9 +3,9 @@ class IiseBudgetTrackerController < ApplicationController
 	def index
 		@budget_request = BudgetRequest.order(:requestDate)
 		@balance = Balance.order(:id)
-		if params[:filterType] #if a user is found
-			@user = User.find_by(:email=>params[:filterType]) #find user by user name
-			@budget_request = BudgetRequest.where(userID: [:filterType])
+		if params[:filterType] && params[:filterType] != ""#if a user is found
+			user = User.find_by(:email=>params[:filterType]) #find user by user name
+			@budget_request = BudgetRequest.where(userID: user.id)
 		end
 		if params[:selectType] && params[:selectType] == "Date"
 			@budget_request = BudgetRequest.order(:requestDate)
@@ -35,6 +35,7 @@ class IiseBudgetTrackerController < ApplicationController
 
 	def create	
 		#create budget_request
+		params[:budget_request][:userID] = current_user.id
 		@budget_request = BudgetRequest.create(budget_request_params)
 		if @budget_request.save
 			redirect_to(products_path(:budget_request_id => @budget_request.id))
@@ -84,7 +85,7 @@ class IiseBudgetTrackerController < ApplicationController
 	end
 
 	def budget_request_params
-		params.require(:budget_request).permit(:eventName, :accountNumber, :subAccount, :requestDate, :individualName, :phoneNumber, :mailingAddress, :uin, :paymentType, 
+		params.require(:budget_request).permit(:userID, :eventName, :accountNumber, :subAccount, :requestDate, :individualName, :phoneNumber, :mailingAddress, :uin, :paymentType, 
 		:tamuAffilliation, :travelFormPassowrd, :requestDescription, :comments, :status, :totalPrice,images: [], items: [:description, :price, :quantity, :type])
 	end
 
