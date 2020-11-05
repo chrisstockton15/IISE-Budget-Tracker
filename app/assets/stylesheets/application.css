@@ -19,6 +19,7 @@
 
 .navbar {
     z-index: 999;
+    background-color: #500000
 }
 
 .nav-area {
@@ -45,14 +46,21 @@
     float: right
 }
 
-.submit {
-    color:#500000
+.status {
+    margin: 4px 2px;
+    text-align: center;
+    
 }
 
-.processed {
-    color:#00FF00
+.updated {
+    color: red
 }
 
-.processing {
-    color:#00FF00
+
+.background {
+    background-color: #FFFFFF
+}
+
+.accent {
+    background-color: #732F2F
 }
