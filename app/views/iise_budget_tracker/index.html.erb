@@ -3,16 +3,15 @@
 <body class="background">
     <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
 
-        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand text-white" %>       
-       <div class="collapse navbar-collapse">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand text-white" %>
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link text-white" %></li>
                 <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link text-white" %></li>
                 <% if current_user %>
                 <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link text-white" %></li>
                 <li class="nav-item"><%= link_to "Change your password", edit_user_registration_path, class: "nav-link text-white" %>
-
-                <% else %>
+                    <% else %>
                 <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link text-white" %></li>
                 <% end %>
             </ul>
@@ -29,9 +28,9 @@
         </div>
     </div>
 
-    <div class="container p-2 my-2">
+    <div class="container-fluid p-2 my-2">
         <div class="budget request index">
-            <h2>Budget Statistics</h2>
+            <h2 class="outerContainer">Budget Statistics</h2>
 
             <%
             submittedTotal = 0
@@ -77,44 +76,45 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col">
+                    <div class="col outerContainer">
                         Processed: $<%= processedTotal %>
                     </div>
-                    <div class="col">
+                    <div class="col outerContainer">
                         Processing: $<%= processingTotal %>
                     </div>
-                    <div class="col">
+                    <div class="col outerContainer">
                         Submitted: $<%= submittedTotal %>
                     </div>
                 </div>
             </div>
 
 
-            <div class="container p-4 my-2">
+            <div class="container-fluid p-4 my-2 d-flex justify-content-center row">
                 <div class="budget request index">
                     <h2>Here are all your budget requests</h2>
 
-                    <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
-                    <div class = "row">
-                      <div class = "col">
-                        <p>
-                          <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-                          <%= form.select :selectType, ["Date", "Status", "Individual Name"], { include_blank: true } %>
-                            <%= form.submit "Sort By" %>
-                          <% end %>
-                        </p>
-                      </div>
-                      <div class = "col">
-                        <p>
-                          <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-                          <%= form.select :filterType, User.all.pluck(:email), { include_blank: true } %>
-                          <%= form.submit "Filter By" %>
-                          <% end %>
-                        </p>
-                      </div>
+
+                    <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'btn btn-outline-primary') %>
+                    <div class="row">
+                        <div class="col">
+                            <p>
+                                <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                                <%= form.select :selectType, ["Date", "Status", "Individual Name"], { include_blank: true } %>
+                                <%= form.submit "Sort By" %>
+                                <% end %>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p>
+                                <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                                <%= form.select :filterType, User.all.pluck(:email), { include_blank: true } %>
+                                <%= form.submit "Filter By" %>
+                                <% end %>
+                            </p>
+                        </div>
                     </div>
 
-                    <table class="listing container p-2 my-2" summary="budget_request list">
+                    <table class="listing container-fluid p-2 my-2" summary="budget_request list">
                         <tr class="header">
                             <th>Event Name</th>
                             <th>Request Description</th>
@@ -150,24 +150,37 @@
                                 <% elsif br.status == 'Processed'%>
                             <td class="center bg-success text-white status">
                                 <% elsif br.status == 'Processing'%>
-
-
                             <td class="center bg-secondary text-white status">
-
-
                                 <% elsif br.status == 'Denied'%>
                             <td class="center bg-danger text-white status">
                                 <% elsif br.status == 'Needs Review'%>
-
-                            <td style="center bg-warning text-dark status">
+                            <td class="center bg-warning text-dark status">
 
                                 <% end %>
                                 <%= br.status %>
                             </td>
 
-                             <td class="center updated">
-                                <%= br.updated_at %>
-                              </td>
+                            <%
+                            timeUpdate = br.updated_at
+                            hrUpdate = timeUpdate.hour
+                            ampmUpdate = "am"
+                            if hrUpdate > 12
+                            hrUpdate -= 12
+                            ampmUpdate = "pm"
+                            end
+
+                            minUpdate = timeUpdate.min.to_s
+                            if timeUpdate.min.to_s.length == 1
+                            minUpdate = "0" + minUpdate
+                            end
+                            $newdaymonthUpdate = (Time.now).strftime("%B") + "_" + timeUpdate.day.to_s
+
+                            $timeString = hrUpdate.to_s + ":" + minUpdate + ampmUpdate + " on " + timeUpdate.month.to_s + "/" + timeUpdate.day.to_s + "/" + timeUpdate.year.to_s
+
+%>
+                            <td class="center updated">
+                                <%= $timeString %>
+                            </td>
 
                             <td class="actions">
                                 <button type="button" class="btn justify-content-center">
@@ -189,17 +202,22 @@
                         <% end %>
                     </table>
                 </div>
+
             </div>
+            <div class="row d-flex justify-content-center">
+                <% if user_signed_in? and current_user.email.include? "admin" %>
+
+                <a href="BUDGET_LOGS_<%=$newdaymonth%>.csv" download="<%=$newdaymonth%>.csv" class="btn btn-outline-primary outerContainer">Export to Excel</a>
+
+                <% end %>
+            </div>
+
+
         </div>
 
-        <% if user_signed_in? %>
 
-        <a href="BUDGET_LOGS_<%=$newdaymonth%>.csv"
-           download="<%=$newdaymonth%>.csv" class="btn btn-outline-primary">Export to Excel</a>
-
-        <% end %>
     </div>
+
 </body>
 
 </html>
-

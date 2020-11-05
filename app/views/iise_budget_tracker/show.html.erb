@@ -7,11 +7,6 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link text-white" %></li>
                 <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link text-white" %></li>
-                <% if current_user %>
-                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link text-white" %></li>
-                <% else %>
-                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link text-white" %></li>
-                <% end %>
             </ul>
         </div>
     </nav>
@@ -100,6 +95,7 @@
         </div>
         <div class="form group my-2">
             <p>
+                <% if current_user.email.include? "admin" %>
                 <% payment_options = ['','',''] %>
                 <% affiliation_options = ['','','']%>
                 <% travel = ['',''] %>
@@ -167,8 +163,9 @@
             :"6335" =>categories["Other Expenses"], \
             :"6901" =>categories["Items for Resale"], \
             :"Total" => '$%.02f' %sum.to_f.round(3)%>
-
                 <%= link_to "Download Request", download_pdf_path(@budget_request.id), :class => 'btn btn-outline-primary' %>
+                <%end%>
+
 
             </p>
         </div>
