@@ -147,7 +147,7 @@
                       <div class = "col">
                         <p>
                           <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-                          <%= form.select :filterType, User.all.pluck(:email), { include_blank: true } %>
+                          <%= form.select :filterType, BudgetRequest.all.pluck(:individualName).uniq, { include_blank: true } %>
                           <%= form.submit "Filter By" %>
                           <% end %>
                         </p>

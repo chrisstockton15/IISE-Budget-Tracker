@@ -5,9 +5,8 @@ class IiseBudgetTrackerController < ApplicationController
 	def index
 		@budget_request = BudgetRequest.order(:requestDate)
 		@balance = Balance.order(:id)
-		if params[:filterType] && params[:filterType] != ""#if a user is found
-			user = User.find_by(:email=>params[:filterType]) #find user by user name
-			@budget_request = BudgetRequest.where(userID: user.id)
+		if params[:filterType] && params[:filterType] != ""
+			@budget_request = BudgetRequest.where(individualName: params[:filterType])
 		end
 		if params[:selectType] && params[:selectType] == "Date"
 			@budget_request = BudgetRequest.order(:requestDate)
