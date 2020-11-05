@@ -9,6 +9,7 @@
                 <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
                 <% if current_user %>
                 <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Change your password", edit_user_registration_path, class: "nav-link" %>
                 <% else %>
                 <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
                 <% end %>
@@ -66,7 +67,7 @@
                 "Event name, Account Number, Sub Account, Request Date, Individual Name, Phone Number, Mailing Address, UIN, Travel Form Password, Request Description, Comments, Status, Total Price", mode: "a")
             %>
             <% end %>
-            
+
             <div class="container">
                 <div class="row">
                   <div class="col">
