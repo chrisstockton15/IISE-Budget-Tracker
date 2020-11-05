@@ -1,16 +1,20 @@
 # frozen_string_literal: true
 
 class IiseBudgetTrackerController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
-  def index
-    @budget_request = BudgetRequest.order(:requestDate)
-
-    @budget_request = BudgetRequest.order(:requestDate) if params[:selectType] && params[:selectType] == 'Date'
-    @budget_request = BudgetRequest.order(:status) if params[:selectType] && params[:selectType] == 'Status'
-    if params[:selectType] && params[:selectType] == 'Individual Name'
-      @budget_request = BudgetRequest.order(:individualName)
-    end
-  end
+  	before_action :authenticate_user!, except: [:index]
+	def index
+		@budget_request = BudgetRequest.order(:requestDate)
+		@balance = Balance.order(:id)
+		if params[:selectType] && params[:selectType] == "Date"
+			@budget_request = BudgetRequest.order(:requestDate)
+		end
+		if params[:selectType] && params[:selectType] == "Status"
+			@budget_request = BudgetRequest.order(:status)
+		end
+		if params[:selectType] && params[:selectType] == "Individual Name"
+			@budget_request = BudgetRequest.order(:individualName)
+		end
+	end
 
   def show
     @budget_request = BudgetRequest.with_attached_images.find(params[:id])
@@ -40,6 +44,15 @@ class IiseBudgetTrackerController < ApplicationController
     @budget_request = BudgetRequest.find(params[:id])
   end
 
+	def destroy 
+	@budget_request = BudgetRequest.find(params[:id])
+	if @budget_request.present?
+		@budget_request.products.destroy_all
+		@budget_request.destroy
+	end
+		redirect_to iise_budget_tracker_index_path
+	end	
+
   def update
     @budget_request = BudgetRequest.find(params[:id])
     if @budget_request.update(budget_request_params)
@@ -49,11 +62,6 @@ class IiseBudgetTrackerController < ApplicationController
     end
   end
 
-  def destroy
-    @budget_request = BudgetRequest.find(params[:id])
-    @budget_request.destroy if @budget_request.present?
-    redirect_to iise_budget_tracker_index_path
-  end
 
   def download_pdf
     @budget_request = BudgetRequest.find(params[:id])

@@ -12,7 +12,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_201_020_220_712) do
+ActiveRecord::Schema.define(version: 2020_10_22_184655) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(version: 20_201_020_220_712) do
     t.index ['key'], name: 'index_active_storage_blobs_on_key', unique: true
   end
 
+<<<<<<< HEAD
   create_table 'budget_requests', force: :cascade do |t|
     t.integer 'userID'
     t.string 'eventName'
@@ -57,6 +59,34 @@ ActiveRecord::Schema.define(version: 20_201_020_220_712) do
     t.binary 'receiptPicture'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+=======
+  create_table "balances", force: :cascade do |t|
+    t.float "balanceAmount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "budget_requests", force: :cascade do |t|
+    t.integer "userID"
+    t.string "eventName"
+    t.string "accountNumber"
+    t.string "subAccount"
+    t.date "requestDate"
+    t.string "individualName"
+    t.string "phoneNumber"
+    t.string "mailingAddress"
+    t.string "uin"
+    t.string "paymentType"
+    t.string "tamuAffilliation"
+    t.string "travelFormPassowrd"
+    t.string "requestDescription"
+    t.string "comments"
+    t.string "status"
+    t.float "totalPrice"
+    t.binary "receiptPicture"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> 7d66a1cdf10d83b7b514dea7b0f897aebe85d211
   end
 
   create_table 'items', force: :cascade do |t|

@@ -2,8 +2,26 @@
 
 Rails.application.routes.draw do
   devise_for :users
-  # root route
-  root to: 'iise_budget_tracker#index'
+	#root route
+	root to: 'iise_budget_tracker#index'
+
+	resources :iise_budget_tracker do
+		member do
+			get :delete
+		end
+	end
+
+	resources :products do
+		member do
+		  get :delete
+		end  
+	end
+
+	resources :balance do
+		member do
+		  get :delete
+		end  
+	end
 
   resources :iise_budget_tracker do
     member do
