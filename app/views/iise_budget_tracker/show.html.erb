@@ -167,7 +167,7 @@
             :"6901" =>categories["Items for Resale"], \
             :"Total" => '$%.02f' %sum.to_f.round(3)%>
 
-                <%= link_to("Download Request", download_pdf_path(@budget_request.id)) %>
+                <%= link_to "Download Request", download_pdf_path(@budget_request.id), :class => 'btn btn-outline-primary' %>
 
             </p>
         </div>

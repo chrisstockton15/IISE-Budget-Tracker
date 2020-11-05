@@ -3,7 +3,7 @@
 <body class="bg-light">
     <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
         <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
-       
+
        <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
@@ -14,11 +14,11 @@
                 <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
                 <% end %>
             </ul>
-     
+
         </div>
-    
-    
-       
+
+
+
     </nav>
 
     <div class="container p-2 my-2 border">
@@ -70,8 +70,8 @@
             File.write("public/OldLog.txt", "public/BUDGET_LOGS_"+$newdaymonth+".csv")
 
 
-           
-            
+
+
 
             File.write("public/BUDGET_LOGS_"+$newdaymonth+".csv",
                 "Generated at " + hr.to_s + ":" + min + ampm + " on " + time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s + "\n")
@@ -98,7 +98,7 @@
             <div class="container p-2 my-2">
                 <div class="budget request index">
                     <h2>Here are all your budget requests</h2>
-                    <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
+                    <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'btn btn-outline-primary') %>
                     <p>
                         <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
                         <%= form.select :selectType, ["Date", "Status", "Individual Name"] %>
@@ -117,10 +117,10 @@
                         <% @budget_request.each do |br| %>
 
 
-        
+
                         <%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s.tr(',',' ') + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
 
-                       
+
                         <% File.write("public/BUDGET_LOGS_"+$newdaymonth+".csv", "\n" + xlsxInfo, mode: "a") %>
 
                         <tr>
@@ -151,16 +151,16 @@
                             </td>
                             <td class="actions">
                                 <button type="button" class="btn">
-                                    <%= link_to(image_tag('receipt_symbol.png', :size => '20x20',:alt => 'show'), iise_budget_tracker_path(br), :class => 'action show') %>
+                                    <%= link_to 'Details', iise_budget_tracker_path(br), :class => 'btn btn-outline-secondary' %>
                                 </button>
                                 <button type="button" class="btn">
-                                    <%= link_to(image_tag('edit_symbol.png', :size => '20x20',:alt => 'edit'), edit_iise_budget_tracker_path(br), :class => 'action edit') %>
+                                    <%= link_to 'Edit', edit_iise_budget_tracker_path(br), :class => 'btn btn-outline-secondary' %>
                                 </button>
                                 <button type="button" class="btn">
-                                    <%= link_to image_tag('products_symbol.png', :size => '20x20',:alt => 'show products'), products_path(:budget_request_id => br.id), :class => 'action show' %>
+                                    <%= link_to 'Add Items', products_path(:budget_request_id => br.id), :class => 'btn btn-outline-secondary' %>
                                 </button>
                                 <button type="button" class="btn">
-                                    <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                    <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-outline-danger' %>
                                 </button>
                             </td>
                         </tr>
@@ -169,10 +169,10 @@
                 </div>
             </div>
         </div>
-        <% if user_signed_in? %>   
-        
-        <a href="BUDGET_LOGS_<%=$newdaymonth%>.csv" 
-           download="<%=$newdaymonth%>.csv">Export to Excel</a>
+        <% if user_signed_in? %>
+
+        <a href="BUDGET_LOGS_<%=$newdaymonth%>.csv"
+           download="<%=$newdaymonth%>.csv" class="btn btn-outline-primary">Export to Excel</a>
         <% end %>
     </div>
 </body>
