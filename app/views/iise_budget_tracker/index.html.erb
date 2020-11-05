@@ -1,23 +1,21 @@
-<html class="bg-light">
+<html class="background">
 
-<body class="bg-light">
+<body class="background">
     <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
-        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
 
-       <div class="collapse navbar-collapse">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand text-white" %>
+        <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
-                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link text-white" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link text-white" %></li>
+
                 <% if current_user %>
-                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link text-white" %></li>
                 <% else %>
-                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link text-white" %></li>
                 <% end %>
             </ul>
-
         </div>
-
-
 
     </nav>
 
@@ -95,7 +93,7 @@
             </div>
 
 
-            <div class="container p-2 my-2">
+            <div class="container p-4 my-2">
                 <div class="budget request index">
                     <h2>Here are all your budget requests</h2>
                     <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'btn btn-outline-primary') %>
@@ -112,9 +110,11 @@
                             <th>Individual Name</th>
                             <th>Request Date</th>
                             <th>Status</th>
+                            <th>Last Updated</th>
                             <th>Action</th>
                         </tr>
                         <% @budget_request.each do |br| %>
+
 
 
 
@@ -137,31 +137,39 @@
                                 <%= br.requestDate %>
                             </td>
                             <% if br.status == 'Submitted'%>
-                            <td class="center submit">
+                            <td class="center bg-primary text-white status">
                                 <% elsif br.status == 'Processed'%>
-                            <td class="center processed">
+                            <td class="center bg-success text-white status">
                                 <% elsif br.status == 'Processing'%>
-                            <td style="center processing">
+
+                            <td class="center bg-secondary text-white status">
+
                                 <% elsif br.status == 'Denied'%>
-                            <td style="center denied">
+                            <td class="center bg-danger text-white status">
                                 <% elsif br.status == 'Needs Review'%>
-                            <td style="center review">
+
+                            <td style="center bg-warning text-dark status">
                                 <% end %>
                                 <%= br.status %>
                             </td>
+                             <td class="center updated">
+                                <%= br.updated_at %>
+                              </td>
                             <td class="actions">
-                                <button type="button" class="btn">
+                                <button type="button" class="btn justify-content-center">
                                     <%= link_to 'Details', iise_budget_tracker_path(br), :class => 'btn btn-outline-secondary' %>
                                 </button>
-                                <button type="button" class="btn">
+                                <button type="button" class="btn justify-content-center">
                                     <%= link_to 'Edit', edit_iise_budget_tracker_path(br), :class => 'btn btn-outline-secondary' %>
                                 </button>
-                                <button type="button" class="btn">
+                                <button type="button" class="btn justify-content-center">
                                     <%= link_to 'Add Items', products_path(:budget_request_id => br.id), :class => 'btn btn-outline-secondary' %>
                                 </button>
-                                <button type="button" class="btn">
+                                <button type="button" class="btn justify-content-center">
                                     <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-outline-danger' %>
+
                                 </button>
+
                             </td>
                         </tr>
                         <% end %>
@@ -171,10 +179,13 @@
         </div>
         <% if user_signed_in? %>
 
+
         <a href="BUDGET_LOGS_<%=$newdaymonth%>.csv"
            download="<%=$newdaymonth%>.csv" class="btn btn-outline-primary">Export to Excel</a>
+
         <% end %>
     </div>
 </body>
 
 </html>
+
