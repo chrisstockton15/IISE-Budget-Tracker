@@ -1,19 +1,23 @@
-<html class="bg-light">
+<html class="background">
 
-<body class="bg-light">
+<body class="background">
     <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
-        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
-        <div class="collapse navbar-collapse">
+
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand text-white" %>       
+       <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
-                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link text-white" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link text-white" %></li>
                 <% if current_user %>
-                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link text-white" %></li>
+                <li class="nav-item"><%= link_to "Change your password", edit_user_registration_path, class: "nav-link text-white" %>
+
                 <% else %>
-                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Sign In", new_user_session_path, class: "nav-link text-white" %></li>
                 <% end %>
             </ul>
         </div>
+
     </nav>
 
     <div class="container p-2 my-2 border">
@@ -28,7 +32,6 @@
     <div class="container p-2 my-2">
         <div class="budget request index">
             <h2>Budget Statistics</h2>
-
 
             <%
             submittedTotal = 0
@@ -46,7 +49,6 @@
             processedTotal += br.totalPrice
             end
 
-
             time = Time.new
             hr = time.hour
             ampm = "am"
@@ -60,31 +62,20 @@
                 min = "0" + min
             end
 
-            File.write("public/BUDGET_LOGS.csv",
+
+            olddaymonth = File.read("public/OldLog.txt")
+            File.delete(olddaymonth)
+            $newdaymonth = (Time.now).strftime("%B") + "_" + time.day.to_s
+            File.write("public/OldLog.txt", "public/BUDGET_LOGS_"+$newdaymonth+".csv")
+
+            File.write("public/BUDGET_LOGS_"+$newdaymonth+".csv",
                 "Generated at " + hr.to_s + ":" + min + ampm + " on " + time.month.to_s + "/" + time.day.to_s + "/" + time.year.to_s + "\n")
-            File.write("public/BUDGET_LOGS.csv",
+            File.write("public/BUDGET_LOGS_"+$newdaymonth+".csv",
                 "Event name, Account Number, Sub Account, Request Date, Individual Name, Phone Number, Mailing Address, UIN, Travel Form Password, Request Description, Comments, Status, Total Price", mode: "a")
             %>
             <% end %>
-            
+
             <div class="container">
-                <div class="row">
-                  <div class="col">
-                    <% @balance.each do |bal| %>
-                      Max Balance: <%= bal.balanceAmount %>
-                    <% end %>
-                  </div>
-                  <div class="col">
-                    <% @balance.each do |bal| %>
-                      Current Balance: <%= bal.balanceAmount - processedTotal %>
-                    <% end %>
-                  </div>
-                  <div class="col">
-                    <% @balance.each do |bal| %>
-                      Expected Balance: <%= bal.balanceAmount - processedTotal - processingTotal - submittedTotal %>
-                    <% end %>
-                  </div>
-                </div>
                 <div class="row">
                     <div class="col">
                         Processed: $<%= processedTotal %>
@@ -96,35 +87,13 @@
                         Submitted: $<%= submittedTotal %>
                     </div>
                 </div>
-              <div class="row">
-                <% existingRequest = '0' %>
-                <% @balance.each do |bal| %>
-                  <div class="row">
-                    <div class="col-md-auto">
-                      <button type="button" class="btn">
-                        <%= link_to("Change Max Balance Amount", edit_balance_path(bal)) %>
-                      </button>
-                    </div>
-                    <div class="col">
-                      <button type="button" class="btn">
-                        <%= link_to("Clear Max Balance Amount", delete_balance_path(bal), method: :delete, id: "clear") %>
-                        </button>
-                    </div>
-                  </div>
-                  <% existingRequest =" '1'" %>
-                <% end %>
-                <% if (existingRequest == '0') %>
-                  <button type="button" class="btn">
-                    <%= link_to("Set Max Balance Amount", new_balance_path, :class => 'action new', id: "set") %>
-                    </button>
-                <% end %>
-              </div>
             </div>
 
 
-            <div class="container p-2 my-2">
+            <div class="container p-4 my-2">
                 <div class="budget request index">
                     <h2>Here are all your budget requests</h2>
+
                     <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
                     <div class = "row">
                       <div class = "col">
@@ -144,6 +113,7 @@
                         </p>
                       </div>
                     </div>
+
                     <table class="listing container p-2 my-2" summary="budget_request list">
                         <tr class="header">
                             <th>Event Name</th>
@@ -151,16 +121,16 @@
                             <th>Individual Name</th>
                             <th>Request Date</th>
                             <th>Status</th>
+                            <th>Last Updated</th>
                             <th>Action</th>
                         </tr>
                         <% @budget_request.each do |br| %>
 
 
+                        <%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s.tr(',',' ') + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
 
-                        <%  xlsxInfo = br.eventName.to_s + "," + br.accountNumber.to_s + "," + br.subAccount.to_s + "," + br.requestDate.to_s + "," + br.individualName.to_s + "," + br.phoneNumber.to_s + "," + br.mailingAddress.to_s.tr(',','') + "," + br.uin.to_s + ","  + br.travelFormPassowrd.to_s + "," + br.requestDescription.to_s + "," + br.comments.to_s + "," + br.status.to_s + "," + br.totalPrice.to_s %>
 
-
-                        <% File.write("public/BUDGET_LOGS.csv", "\n" + xlsxInfo, mode: "a") %>
+                        <% File.write("public/BUDGET_LOGS_"+$newdaymonth+".csv", "\n" + xlsxInfo, mode: "a") %>
 
                         <tr>
                             <td class="center">
@@ -176,39 +146,44 @@
                                 <%= br.requestDate %>
                             </td>
                             <% if br.status == 'Submitted'%>
-                            <td class="center submit">
+                            <td class="center bg-primary text-white status">
                                 <% elsif br.status == 'Processed'%>
-                            <td class="center processed">
+                            <td class="center bg-success text-white status">
                                 <% elsif br.status == 'Processing'%>
-                            <td style="center processing">
+
+
+                            <td class="center bg-secondary text-white status">
+
+
                                 <% elsif br.status == 'Denied'%>
-                            <td style="center denied">
+                            <td class="center bg-danger text-white status">
                                 <% elsif br.status == 'Needs Review'%>
-                            <td style="center review">
+
+                            <td style="center bg-warning text-dark status">
+
                                 <% end %>
                                 <%= br.status %>
                             </td>
-                            
-                                <% @temp = "Processed" %>
-                                <% @temp_br = br %>
-                                <% form_for(br, url: change_status_path(id:br.id), method: :patch, local: true) do |form| %>
-                                <% form.select :status, [[br.status], [@temp]] %>
-                                <% form.submit "Update Status" %>
-                                <% end %> 
-                            
+
+                             <td class="center updated">
+                                <%= br.updated_at %>
+                              </td>
+
                             <td class="actions">
-                                <button type="button" class="btn">
-                                    <%= link_to("Show", iise_budget_tracker_path(br), :class => 'action show') %>
+                                <button type="button" class="btn justify-content-center">
+                                    <%= link_to 'Details', iise_budget_tracker_path(br), :class => 'btn btn-outline-secondary' %>
                                 </button>
-                                <button type="button" class="btn">
-                                    <%= link_to("Edit", edit_iise_budget_tracker_path(br), :class => 'action edit') %>
+
+                                <button type="button" class="btn justify-content-center">
+                                    <%= link_to 'Edit', edit_iise_budget_tracker_path(br), :class => 'btn btn-outline-secondary' %>
                                 </button>
-                                <button type="button" class="btn">
-                                    <%= link_to "View Items", products_path(:budget_request_id => br.id), :class => 'action show' %>
+                                <button type="button" class="btn justify-content-center">
+                                    <%= link_to 'Add Items', products_path(:budget_request_id => br.id), :class => 'btn btn-outline-secondary' %>
                                 </button>
-                                <button type="button" class="btn">
-                                    <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' } %>
+                                <button type="button" class="btn justify-content-center">
+                                    <%= button_to 'Remove', iise_budget_tracker_path(br), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-outline-danger' %>
                                 </button>
+
                             </td>
                         </tr>
                         <% end %>
@@ -216,8 +191,15 @@
                 </div>
             </div>
         </div>
-        <a href="BUDGET_LOGS.csv" download="BUDGET_LOGS.csv">Export to Excel</a>
+
+        <% if user_signed_in? %>
+
+        <a href="BUDGET_LOGS_<%=$newdaymonth%>.csv"
+           download="<%=$newdaymonth%>.csv" class="btn btn-outline-primary">Export to Excel</a>
+
+        <% end %>
     </div>
 </body>
 
 </html>
+
