@@ -21,9 +21,9 @@
         <%= link_to("<< Back to Requests", iise_budget_tracker_index_path(:budget_request_id => @budget_request.id), :class => 'back-link') %>
 
         <div class="products index">
-            <h2>Products</h2>
+            <h2>Items</h2>
 
-            <%= link_to("Add New Product", new_product_path(:budget_request_id => @budget_request.id), :class => 'action new') %>
+            <%= link_to("Add New Items", new_product_path(:budget_request_id => @budget_request.id), :class => 'btn btn-outline-primary') %>
 
             <table class="listing container p-2 my-2" summary="Product list">
                 <tr class="header">
@@ -41,13 +41,13 @@
                     <td class="center"><%= product.price %></td>
                     <td class="actions center">
                         <button type="button" class="btn">
-                            <%= link_to("Show", product_path(product,:budget_request_id => @budget_request.id), :class => 'action show') %>
+                            <%= link_to 'Item Details', product_path(product,:budget_request_id => @budget_request.id), :class => 'btn btn-outline-secondary' %>
                         </button>
                         <button type="button" class="btn">
-                            <%= link_to("Edit", edit_product_path(product,:budget_request_id => @budget_request.id), :class => 'action edit') %>
+                            <%= link_to 'Edit', edit_product_path(product,:budget_request_id => @budget_request.id), :class => 'btn btn-outline-secondary' %>
                         </button>
                         <button type="button" class="btn">
-                            <%= link_to("Delete", delete_product_path(product,:budget_request_id => @budget_request.id), :class => 'action delete') %>
+                            <%= link_to 'Remove', delete_product_path(product,:budget_request_id => @budget_request.id), :class => 'btn btn-outline-danger' %>
                         </button>
                     </td>
                 </tr>
