@@ -93,13 +93,27 @@
             <div class="container p-4 my-2">
                 <div class="budget request index">
                     <h2>Here are all your budget requests</h2>
-                    <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'btn btn-outline-primary') %>
-                    <p>
-                        <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
-                        <%= form.select :selectType, ["Date", "Status", "Individual Name"] %>
-                        <%= form.submit "Sort By" %>
-                        <% end %>
-                    </p>
+
+                    <%= link_to("Create New Budget Request", new_iise_budget_tracker_path, :class => 'action new') %>
+                    <div class = "row">
+                      <div class = "col">
+                        <p>
+                          <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                          <%= form.select :selectType, ["Date", "Status", "Individual Name"], { include_blank: true } %>
+                            <%= form.submit "Sort By" %>
+                          <% end %>
+                        </p>
+                      </div>
+                      <div class = "col">
+                        <p>
+                          <%= form_with(url: iise_budget_tracker_index_path, method: :get, local: true) do |form| %>
+                          <%= form.select :filterType, User.all.pluck(:email), { include_blank: true } %>
+                          <%= form.submit "Filter By" %>
+                          <% end %>
+                        </p>
+                      </div>
+                    </div>
+
                     <table class="listing container p-2 my-2" summary="budget_request list">
                         <tr class="header">
                             <th>Event Name</th>
@@ -150,9 +164,11 @@
                                 <% end %>
                                 <%= br.status %>
                             </td>
+
                              <td class="center updated">
                                 <%= br.updated_at %>
                               </td>
+
                             <td class="actions">
                                 <button type="button" class="btn justify-content-center">
                                     <%= link_to 'Details', iise_budget_tracker_path(br), :class => 'btn btn-outline-secondary' %>
