@@ -1,15 +1,12 @@
-<html class="bg-light">
+<html class="background">
 
-<body class="bg-light">
-    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom bg-light">
-        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
+<body class="background">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand text-white" %>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
-                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
-                <% if current_user %>
-                <li class="nav-item"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-                <% end %>
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link text-white" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link text-white" %></li>
             </ul>
         </div>
     </nav>
@@ -75,15 +72,15 @@
                 <h5><%= f.label "Comments:" %></h5>
                 <%= f.text_field :comments, {class:"form-control", placeholder:"Enter comments"}%>
             </div>
-            <% if current_user.admin == false %>
-            <div class="form group my-2">
-                <h5>Status:</h5>
-                <p><%= @budget_request.status %></p>
-            </div>
-            <%else%>
+            <% if current_user.email.include? "admin"%>
             <div class="form group my-2">
                 <h5><%= f.label "Status:" %></h5>
                 <%= f.select :status, ['Submitted', 'Processing', 'Processed', 'Denied', 'Needs Review']%>
+            </div>
+            <%else%>
+            <div class="form group my-2">
+                <h5>Status:</h5>
+                <p><%= @budget_request.status %></p>
             </div>
             <%end%>
             <div class="form group my-2">

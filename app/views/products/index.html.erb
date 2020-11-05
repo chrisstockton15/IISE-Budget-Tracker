@@ -1,12 +1,12 @@
-<html class="bg-light">
+<html class="background">
 
-<body class="bg-light">
-    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom bg-light">
-        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand" %>
+<body class="background">
+    <nav class="navbar sticky-top navbar-expand-sm navbar-light px-5 border-bottom">
+        <%= link_to "IISE Budget Request Tracker", iise_budget_tracker_index_path, class: "navbar-brand text-white" %>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link" %></li>
-                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link" %></li>
+                <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link text-white" %></li>
+                <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link text-white" %></li>
             </ul>
         </div>
     </nav>
@@ -16,9 +16,9 @@
         <%= link_to("<< Back to Requests", iise_budget_tracker_index_path(:budget_request_id => @budget_request.id), :class => 'back-link') %>
 
         <div class="products index">
-            <h2>Products</h2>
+            <h2>Items</h2>
 
-            <%= link_to("Add New Product", new_product_path(:budget_request_id => @budget_request.id), :class => 'action new') %>
+            <%= link_to("Add New Items", new_product_path(:budget_request_id => @budget_request.id), :class => 'btn btn-outline-primary') %>
 
             <table class="listing container p-2 my-2" summary="Product list">
                 <tr class="header">
@@ -36,13 +36,13 @@
                     <td class="center"><%= product.price %></td>
                     <td class="actions center">
                         <button type="button" class="btn">
-                            <%= link_to("Show", product_path(product,:budget_request_id => @budget_request.id), :class => 'action show') %>
+                            <%= link_to 'Item Details', product_path(product,:budget_request_id => @budget_request.id), :class => 'btn btn-outline-secondary' %>
                         </button>
                         <button type="button" class="btn">
-                            <%= link_to("Edit", edit_product_path(product,:budget_request_id => @budget_request.id), :class => 'action edit') %>
+                            <%= link_to 'Edit', edit_product_path(product,:budget_request_id => @budget_request.id), :class => 'btn btn-outline-secondary' %>
                         </button>
                         <button type="button" class="btn">
-                            <%= link_to("Delete", delete_product_path(product,:budget_request_id => @budget_request.id), :class => 'action delete') %>
+                            <%= link_to 'Remove', delete_product_path(product,:budget_request_id => @budget_request.id), :class => 'btn btn-outline-danger' %>
                         </button>
                     </td>
                 </tr>

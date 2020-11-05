@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProducts < ActiveRecord::Migration[5.1]
   def up
     create_table :products do |t|
@@ -9,12 +11,11 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.string :permalink
       t.timestamps
     end
-    add_index("products", "budget_request_id")
-    add_index("products", "permalink")
+    add_index('products', 'budget_request_id')
+    add_index('products', 'permalink')
   end
 
   def down
     drop_table :products
   end
-
 end
