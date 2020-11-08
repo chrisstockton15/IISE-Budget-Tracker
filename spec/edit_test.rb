@@ -23,6 +23,7 @@ describe 'Edit Budget Request', type: :system do
     sleep(1)
     click_on 'Create Budget Request'
     sleep(1)
+    click_on '<< Back to Requests'
     expect(page).to have_content('notUpdated Description')
     sleep(1)
     click_on('Edit', match: :first)

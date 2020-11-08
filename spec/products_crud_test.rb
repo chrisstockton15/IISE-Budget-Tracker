@@ -16,8 +16,8 @@ RSpec.describe 'Product', type: :system do
       click_on 'Create New Budget Request'
       fill_in 'budget_request_requestDescription', with: 'Description 1'
       click_on 'Create Budget Request'
-      click_on('View Items', match: :first)
-      click_on 'Add New Product'
+      #click_on('View Items', match: :first)
+      click_on 'Add New Items'
       fill_in 'product_description', with: 'Pizza'
       select 'Food', from: 'product_expense_type'
       fill_in 'product_quantity', with: '25'
@@ -40,8 +40,8 @@ RSpec.describe 'Product', type: :system do
       click_on 'Create New Budget Request'
       fill_in 'budget_request_requestDescription', with: 'Description 1'
       click_on 'Create Budget Request'
-      click_on('View Items', match: :first)
-      click_on 'Add New Product'
+      #click_on('View Items', match: :first)
+      click_on 'Add New Items'
       fill_in 'product_description', with: 'Pizza'
       select 'Food', from: 'product_expense_type'
       fill_in 'product_quantity', with: '25'
@@ -67,14 +67,14 @@ RSpec.describe 'Product', type: :system do
       click_on 'Create New Budget Request'
       fill_in 'budget_request_requestDescription', with: 'Description 1'
       click_on 'Create Budget Request'
-      click_on('View Items', match: :first)
-      click_on 'Add New Product'
+      #click_on('View Items', match: :first)
+      click_on 'Add New Items'
       fill_in 'product_description', with: 'Pizza'
       select 'Food', from: 'product_expense_type'
       fill_in 'product_quantity', with: '25'
       fill_in 'product_price', with: '50'
       click_on 'Create Product'
-      click_on('Show', match: :first)
+      click_on('Item Details', match: :first)
       expect(page).to have_content('Pizza')
       expect(page).to have_content('Food')
       expect(page).to have_content('25')
@@ -95,19 +95,19 @@ RSpec.describe 'Product', type: :system do
       click_on 'Create New Budget Request'
       fill_in 'budget_request_requestDescription', with: 'Description 1'
       click_on 'Create Budget Request'
-      click_on('View Items', match: :first)
-      click_on 'Add New Product'
+      #click_on('View Items', match: :first)
+      click_on 'Add New Items'
       fill_in 'product_description', with: 'Pizza'
       select 'Food', from: 'product_expense_type'
       fill_in 'product_quantity', with: '25'
       fill_in 'product_price', with: '50'
       click_on 'Create Product'
-      click_on('Delete', match: :first)
+      click_on('Remove', match: :first)
       click_on('Delete Product', match: :first)
       expect(page).to have_no_content('Pizza')
     end
   end
-
+  
   describe 'back to budgets' do
     it 'shows the budget index' do
       visit iise_budget_tracker_index_path
@@ -121,7 +121,7 @@ RSpec.describe 'Product', type: :system do
       click_on 'Create New Budget Request'
       fill_in 'budget_request_requestDescription', with: 'Description 1'
       click_on 'Create Budget Request'
-      click_on('View Items', match: :first)
+      #click_on('View Items', match: :first)
       click_on '<< Back to Requests'
       expect(page).to have_content('Description 1')
     end
