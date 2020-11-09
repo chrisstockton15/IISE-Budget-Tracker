@@ -21,16 +21,19 @@ describe 'Sort Budget Request By Status', type: :system do
     select('Submitted', from: 'budget_request_status')
     fill_in 'budget_request_requestDescription', with: 'A'
     click_on 'Create Budget Request'
+    click_on '<< Back to Requests'
 
     click_on 'Create New Budget Request'
     select('Processing', from: 'budget_request_status')
     fill_in 'budget_request_requestDescription', with: 'B'
     click_on 'Create Budget Request'
+    click_on '<< Back to Requests'
 
     click_on 'Create New Budget Request'
     select('Processed', from: 'budget_request_status')
     fill_in 'budget_request_requestDescription', with: 'C'
     click_on 'Create Budget Request'
+    click_on '<< Back to Requests'
 
     expect(page).to have_content('A')
     expect(page).to have_content('B')
