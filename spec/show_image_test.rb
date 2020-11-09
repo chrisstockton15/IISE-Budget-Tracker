@@ -21,8 +21,9 @@ RSpec.describe 'Show', type: :system do
       # sleep(5)
       # attach_file("Upload Receipt", Rails.root + "spec/files/images/simplecov_1.JPG")
       click_on 'Create Budget Request'
+      click_on '<< Back to Requests'
       # sleep(10)
-      click_on('Show', match: :first)
+      click_on('Details', match: :first)
       # find('#Show .search').click
       # sleep(100)
       expect(page).to have_content('simplecov_1.JPG')
@@ -43,7 +44,8 @@ RSpec.describe 'Show', type: :system do
       attach_file 'budget_request_images', [Rails.root + 'spec/files/images/simplecov_1.JPG', Rails.root + 'spec/files/images/simplecov_2.JPG']
       fill_in 'budget_request_requestDescription', with: 'notUpdated Description'
       click_on 'Create Budget Request'
-      click_on('Show', match: :first)
+      click_on '<< Back to Requests'
+      click_on('Details', match: :first)
       expect(page).to have_content('simplecov_1.JPG')
       expect(page).to have_content('simplecov_2.JPG')
     end
