@@ -48,7 +48,7 @@
             processedTotal += br.totalPrice
             end
 
-            time = Time.new
+            time = Time.current()
             hr = time.hour
             ampm = "am"
             if hr > 12
@@ -103,31 +103,33 @@
                         Submitted: $<%= submittedTotal %>
                     </div>
                 </div>
-                <div class="row">
-                    <% existingRequest = '0' %>
-                    <% @balance.each do |bal| %>
+                <% if user_signed_in? and current_user.email.include? "admin" %>
                     <div class="row">
+                        <% existingRequest = '0' %>
+                        <% @balance.each do |bal| %>
+                        <div class="row">
 
-                        <div class="col-md-auto">
-                            <button type="button" class="btn btn-outline-primary">
-                                <%= link_to("Change Max Balance Amount", edit_balance_path(bal)) %>
-                            </button>
-                        </div>
-                        <div class="col">
-                            <button type="button" class="btn btn-outline-primary">
-                                <%= link_to("Clear Max Balance Amount", delete_balance_path(bal), method: :delete, id: "clear") %>
-                            </button>
-                        </div>
+                            <div class="col-md-auto">
+                                <button type="button" class="btn btn-outline-primary">
+                                    <%= link_to("Change Max Balance Amount", edit_balance_path(bal)) %>
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-outline-primary">
+                                    <%= link_to("Clear Max Balance Amount", delete_balance_path(bal), method: :delete, id: "clear") %>
+                                </button>
+                            </div>
 
+                        </div>
+                        <% existingRequest =" '1'" %>
+                        <% end %>
+                        <% if (existingRequest == '0') %>
+                        <button type="button" class="btn btn-outline-primary">
+                            <%= link_to("Set Max Balance Amount", new_balance_path, :class => 'action new', id: "set") %>
+                        </button>
+                        <% end %>
                     </div>
-                    <% existingRequest =" '1'" %>
                     <% end %>
-                    <% if (existingRequest == '0') %>
-                    <button type="button" class="btn btn-outline-primary">
-                        <%= link_to("Set Max Balance Amount", new_balance_path, :class => 'action new', id: "set") %>
-                    </button>
-                    <% end %>
-                </div>
             </div>
 
 
