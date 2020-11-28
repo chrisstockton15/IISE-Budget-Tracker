@@ -34,7 +34,7 @@ class IiseBudgetTrackerController < ApplicationController
   end
 
 
-	def create	
+	def create
 		#create budget_request
 		params[:budget_request][:userID] = current_user.id
 		@budget_request = BudgetRequest.create(budget_request_params)
@@ -49,7 +49,7 @@ class IiseBudgetTrackerController < ApplicationController
     @budget_request = BudgetRequest.find(params[:id])
   end
 
-	def destroy 
+	def destroy
 		@budget_request = BudgetRequest.find(params[:id])
 		filepath = "#{Rails.root}/public/pdf/request" + @budget_request.id.to_s + ".pdf"
 		File.delete(filepath) if File.exist?(filepath)
@@ -58,7 +58,7 @@ class IiseBudgetTrackerController < ApplicationController
 			@budget_request.destroy
 		end
 			redirect_to iise_budget_tracker_index_path
-	end	
+	end
 
 
   def update
@@ -88,11 +88,14 @@ class IiseBudgetTrackerController < ApplicationController
 	end
 
 	def budget_request_params
-		params.require(:budget_request).permit(:userID, :eventName, :accountNumber, :subAccount, :requestDate, :individualName, :phoneNumber, :mailingAddress, :uin, :paymentType, 
+		params.require(:budget_request).permit(:userID, :eventName, :accountNumber, :subAccount, :requestDate, :individualName, :phoneNumber, :mailingAddress, :uin, :paymentType,
 		:tamuAffilliation, :travelFormPassowrd, :requestDescription, :comments, :status, :totalPrice,images: [], items: [:description, :price, :quantity, :type])
 	end
 
   def item_params
     params.require(:item).permit(:description, :price, :quantity, :type)
   end
+
+  
+
 end
