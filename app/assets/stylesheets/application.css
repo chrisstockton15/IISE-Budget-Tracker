@@ -14,57 +14,54 @@
  *= require_self
  */
 @import "node_modules/bootstrap/scss/bootstrap";
-@import 'toaster';
-
+@import "toastr";
 
 .navbar {
-    z-index: 999;
-    background-color: #500000
+  z-index: 999;
+  background-color: #500000;
 }
 
 .nav-area {
-    background: blue;
+  background: blue;
 }
 
 .nav-title {
-    padding-left: 20%;
+  padding-left: 20%;
 }
 
 .app-name {
-    color: white;
+  color: white;
 }
 
 .navbar-brand {
-    color: white;
+  color: white;
 }
 
 .navbar-brand:hover {
-    color:white;
+  color: white;
 }
 
 .nav-list {
-    float: right
+  float: right;
 }
 
 .status {
-    margin: 4px 2px;
-    text-align: center;
-
+  margin: 4px 2px;
+  text-align: center;
 }
 
 .updated {
-    color: black
+  color: black;
 }
 
-
 .background {
-    background-color: #FFFFFF
+  background-color: #ffffff;
 }
 
 .accent {
-    background-color: #732F2F
+  background-color: #732f2f;
 }
 
 .outerContainer {
-    text-align: center;
+  text-align: center;
 }

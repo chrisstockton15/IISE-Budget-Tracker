@@ -18,11 +18,12 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-require("bootstrap")
+global.toastr = require("toastr");
+require("bootstrap");
 import "../stylesheets/application";
 document.addEventListener("turbolinks:load", function () {
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-        $('[data-toggle="popover"]').popover()
-    })
-})
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="popover"]').popover();
+  });
+});
