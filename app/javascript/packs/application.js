@@ -14,7 +14,8 @@
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-
+global.toastr = require("toastr")
 console.log('Hello World from Webpacker')
 //= require jquery
 //= require jquery_ujs
+import "../../assets/stylesheets/application"

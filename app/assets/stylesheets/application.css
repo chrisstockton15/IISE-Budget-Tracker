@@ -14,7 +14,7 @@
  *= require_self
  */
 @import "node_modules/bootstrap/scss/bootstrap";
-
+@import 'toaster';
 
 
 .navbar {
@@ -49,7 +49,7 @@
 .status {
     margin: 4px 2px;
     text-align: center;
-    
+
 }
 
 .updated {
