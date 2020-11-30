@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><%= link_to "Home", iise_budget_tracker_index_path, class: "nav-link text-white" %></li>
-                <% if user_signed_in? and current_user.email.include? "admin" %>
+                <% if user_signed_in? and current_user.admin_role? %>
                 <li class="nav-item"><%= link_to "Admin", rails_admin_path, class: "nav-link text-white" %></li>
                 <% end %>
                 <li class="nav-item"><%= link_to "Create New Request", new_iise_budget_tracker_path, class: "nav-link text-white" %></li>
@@ -106,7 +106,8 @@
                         Submitted: $<%= submittedTotal %>
                     </div>
                 </div>
-                <% if user_signed_in? and current_user.email.include? "admin" %>
+                
+                <% if user_signed_in? and current_user.admin_role? %>
                     <div class="row">
                         <% existingRequest = '0' %>
                         <% @balance.each do |bal| %>
@@ -254,7 +255,7 @@
 
             </div>
             <div class="row d-flex justify-content-center">
-                <% if user_signed_in? and current_user.email.include? "admin" %>
+                <% if user_signed_in? and current_user.admin_role? %>
 
                 <a href="BUDGET_LOGS_<%=$newdaymonth%>.csv" download="<%=$newdaymonth%>.csv" class="btn btn-outline-primary outerContainer">Export to Excel</a>
 
