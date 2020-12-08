@@ -13,4 +13,5 @@ Deploy code in Heroku
   . scroll down to "Manual Deploy"
   . select github branch to deploy from
   . press deploy
-  
+
+Please see ReadMe.docx for further details
